@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class VictimeService {
@@ -20,6 +18,20 @@ public class VictimeService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    public VictimeEntity creerVictimeDepuisJson(String filePath) throws IOException {
+        // Lire le fichier JSON et mapper sur un DTO
+        File file = new File(filePath);
+        VictimeDTO victimeDTO = objectMapper.readValue(file, VictimeDTO.class);
 
+        // Convertir le DTO en entité
+        VictimeEntity victimeEntity = new VictimeEntity(
+                victimeDTO.arme(),
+                victimeDTO.lieu(),
+                victimeDTO.description()
+        );
+
+        // Sauvegarder l'entité dans la base de données
+        return victimeRepository.save(victimeEntity);
+    }
 
 }
