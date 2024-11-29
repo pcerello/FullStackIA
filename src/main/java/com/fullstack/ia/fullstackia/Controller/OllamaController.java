@@ -28,7 +28,7 @@ public class OllamaController {
 
 
 
-    @PostMapping(path = "/dora")
+    @PostMapping(path = "/generateHistory")
     public String askDoraAQuestion(@RequestParam String question) {
 
         String prompt = fileReadingService.readInternalFileAsString("prompts/promptCreateScenario.txt") ;
