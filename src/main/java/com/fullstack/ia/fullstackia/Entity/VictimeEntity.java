@@ -1,6 +1,7 @@
 package com.fullstack.ia.fullstackia.Entity;
 import com.fullstack.ia.fullstackia.Enum.Arme;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
