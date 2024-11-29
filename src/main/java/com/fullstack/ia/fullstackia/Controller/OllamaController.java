@@ -1,47 +1,55 @@
 package com.fullstack.ia.fullstackia.Controller;
+import com.fullstack.ia.fullstackia.Service.FileReadingService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.SystemMessage;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/ollama")
+@RequestMapping(path = "/model")
+@RequiredArgsConstructor
 public class OllamaController {
 
-    // URL d'Ollama
-    @Value("${ollama.url}")
-    private String ollamaUrl;
+    private final FileReadingService fileReadingService;
+    private final OllamaChatModel chatModel;
 
-    // Modèle à utiliser
-    @Value("${spring.ai.ollama.chat.options.model}")
-    private String model;
 
-    // Création d'un test simple pour interroger Ollama
-    @PostMapping("/generate-scenario")
-    public String generateScenario(@RequestParam String prompt) {
-        RestTemplate restTemplate = new RestTemplate();
 
-        // Corps de la requête avec le prompt
-        Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", model);
-        requestBody.put("prompt", prompt);
+    @PostMapping(path = "/dora")
+    public String askDoraAQuestion(@RequestParam String question) {
 
-        // En-têtes HTTP
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
+        String prompt = fileReadingService.readInternalFileAsString("prompts/promptCreateScenario.txt") ;
 
-        // Envoi de la requête
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<Map> response = restTemplate.postForEntity(ollamaUrl, entity, Map.class);
+        List<Message> messages = new ArrayList<>();
+        messages.add(new SystemMessage("<start_of_turn>" + prompt + "<end_of_turn>")) ;
+        messages.add(new UserMessage("<start_of_turn>" + question + "<end_of_turn>")) ;
 
-        // Récupération de la réponse et retour au client
-        Map responseBody = response.getBody();
-        return responseBody != null ? (String) responseBody.get("response") : "Erreur dans la génération.";
+        Prompt promptToSend = new Prompt(messages);
+        Flux<ChatResponse> chatResponses = chatModel.stream(promptToSend);
+        String message = Objects.requireNonNull(chatResponses.collectList().block()).stream()
+                .map(response -> response.getResult().getOutput().getContent())
+                .collect(Collectors.joining("")) ;
+
+        return message ;
+
     }
+
+
+
+
+
+
 }
