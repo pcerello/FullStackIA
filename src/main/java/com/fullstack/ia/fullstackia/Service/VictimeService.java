@@ -1,7 +1,7 @@
 package com.fullstack.ia.fullstackia.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fullstack.ia.fullstackia.Dto.VictimeDTO;
+import com.fullstack.ia.fullstackia.Dto.VictimeDto;
 import com.fullstack.ia.fullstackia.Entity.VictimeEntity;
 import com.fullstack.ia.fullstackia.Repository.VictimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class VictimeService {
     public VictimeEntity creerVictimeDepuisJson(String filePath) throws IOException {
         // Lire le fichier JSON et mapper sur un DTO
         File file = new File(filePath);
-        VictimeDTO victimeDTO = objectMapper.readValue(file, VictimeDTO.class);
+        VictimeDto victimeDTO = objectMapper.readValue(file, VictimeDto.class);
 
         // Convertir le DTO en entité
         VictimeEntity victimeEntity = new VictimeEntity(

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TemoiniageEntity {
+public class TemoignageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" ,unique = true, nullable = false)
@@ -24,7 +24,15 @@ public class TemoiniageEntity {
     // Donne la veracité du témoiniage
     private Boolean isTrue;
 
-//    @ManyToOne
-//    @JoinColumn(name="id")
-//    private Personnages personnage;
+    @ManyToOne
+    @JoinColumn(name="temoin_id")
+    // Personnage avec le role TEMOIN
+    private PersonnagesEntity temoin;
+
+    @ManyToOne
+    @JoinColumn(name="suspect_id")
+    // Personnage avec le role TEMOIN
+    private PersonnagesEntity suspect;
+
+
 }

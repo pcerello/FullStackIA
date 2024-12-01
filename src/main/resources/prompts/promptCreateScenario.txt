@@ -1,10 +1,62 @@
-Inspire-toi du Cluedo pour créer une histoire de meurtre. Il y a 1 victime, 1 assassin, des suspects et des témoins.
-Il me faut une table de personnages avec :
-- nom
-- prenom
-- age
-- sexe ( HOMME, FEMME)
-- role ( VICTIME, ASSASSIN, SUSPECT, TEMOIN)
-- caractere
-- alibi
-- mobile (la raison de vouloir tuer la victime).
+[
+  {
+    "nom": "Dupont",
+    "prenom": "Pierre",
+    "age": 42,
+    "sexe": "homme",
+    "status": "suspect"
+  },
+  {
+    "nom": "Meyer",
+    "prenom": "Sébastien",
+    "age": 31,
+    "sexe": "homme",
+    "status": "témoin"
+  },
+  {
+    "nom": "Martin",
+    "prenom": "Laurent",
+    "age": 61,
+    "sexe": "homme",
+    "status": "suspect"
+  },
+  {
+    "nom": "Durand",
+    "prenom": "Camille",
+    "age": 25,
+    "sexe": "femme",
+    "status": "témoin"
+  },
+  {
+    "nom": "Garcia",
+    "prenom": "Anaïs",
+    "age": 39,
+    "sexe": "femme",
+    "status": "suspect"
+  },
+  {
+    "nom": "Lee",
+    "prenom": "Alexandre",
+    "age": 68,
+    "sexe": "homme",
+    "status": "victime"
+  },
+  {
+    "nom": "Hill",
+    "prenom": "Ava",
+    "age": 27,
+    "sexe": "femme",
+    "status": "témoin"
+  },
+  {
+    "nom": "Kumar",
+    "prenom": "Léo",
+    "age": 83,
+    "sexe": "homme",
+    "status": "suspect"
+  }
+]
+Avec les json que je viens de te fournir je veux que tu me creer un scenario de meurtre,
+le meutre aurait lieu dans un manoir. je veux des détails sur le lieu et l'heure en introduction.
+Puis donne moi le nom, l'âge et une description de la victime ainsi que la scène de crime.
+Pour finir dis moi qui est le meurtrier ainsi que son mobile.

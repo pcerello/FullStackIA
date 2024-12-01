@@ -34,3 +34,6 @@ build/
 
 ### Owner App ###
 src/main/resources/application-dev.properties
+
+### TOKEN https://huggingface.co/ ###
+# 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

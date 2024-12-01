@@ -4,7 +4,7 @@ import com.fullstack.ia.fullstackia.Enum.Arme;
 import lombok.Builder;
 
 @Builder
-public record VictimeDTO (
+public record VictimeDto(
                             Arme arme,
                             String lieu,
                             String description

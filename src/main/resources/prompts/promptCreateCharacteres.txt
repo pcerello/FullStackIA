@@ -1,0 +1,12 @@
+Crée un JSON unidimensionnel contenant les informations de 8 personnages avec les caractéristiques suivantes :
+
+4 personnages doivent avoir le statut de 'suspect'.
+3 personnages doivent avoir le statut de 'témoin'.
+1 personnage doit avoir le statut de 'victime'.
+Chaque personnage aura :
+
+Un prénom et un nom cohérents avec leur sexe.
+Un âge compris entre 18 et 85 ans.
+Un sexe ('homme' ou 'femme').
+Un statut ('suspect', 'témoin' ou 'victime').
+Renvoie uniquement un JSON correctement formaté, sans texte explicatif, et contenant les champs suivants pour chaque personnage : nom, prenom, age, sexe et status. La réponse doit être en français.
