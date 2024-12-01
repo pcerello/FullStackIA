@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Setter
-public class Personnages {
+public class PersonnageEntity {
 
 
     // un nom, prénom, age, sexe, role, caractère, alibi, mobile.
@@ -28,9 +28,9 @@ public class Personnages {
 
 
 
-    public Personnages() {}
+    public PersonnageEntity() {}
 
-    public Personnages(String nom, String prenom, int age, Sexe sexe, Role role, String caractere, String alibi, String mobile) {
+    public PersonnageEntity(String nom, String prenom, int age, Sexe sexe, Role role, String caractere, String alibi, String mobile) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
