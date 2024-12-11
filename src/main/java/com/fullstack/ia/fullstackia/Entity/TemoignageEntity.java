@@ -24,7 +24,13 @@ public class TemoignageEntity {
     // Donne la veracité du témoiniage
     private Boolean isTrue;
 
-//    @ManyToOne
-//    @JoinColumn(name="id")
-//    private Personnages personnage;
+    @ManyToOne
+    @JoinColumn(name="temoin_id")
+    // Personnage avec le role TEMOIN
+    private PersonnageEntity temoin;
+
+    @ManyToOne
+    @JoinColumn(name="suspect_id")
+    // Personnage avec le role TEMOIN
+    private PersonnageEntity suspect;
 }

@@ -1,5 +1,6 @@
 package com.fullstack.ia.fullstackia.Entity;
 
+import com.fullstack.ia.fullstackia.Enum.PreuveMateriel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,9 +23,13 @@ public class PreuveEntity {
     private String incriminant;
     private String disculpant;
 
+    // Type de preuve materiel, lettre, objet personnel
+    @Enumerated(EnumType.STRING)
+    private PreuveMateriel preuveMateriel;
 
-//    @ManyToOne
-//    @JoinColumn(name="id")
-//    private Personnages personnage;
+    // Chaque témoignage doit pouvoir être comparé au preuves matériels
+    @OneToOne
+    @JoinColumn(name="temoignage_id")
+    private TemoignageEntity temoignage;
 
 }

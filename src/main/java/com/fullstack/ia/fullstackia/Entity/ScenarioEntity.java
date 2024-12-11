@@ -16,6 +16,9 @@ public class ScenarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique = true, nullable = false)
     private long id;
-    private String story;
+    private String description;
 
+    public ScenarioEntity(String description) {
+        this.description = description;
+    }
 }
