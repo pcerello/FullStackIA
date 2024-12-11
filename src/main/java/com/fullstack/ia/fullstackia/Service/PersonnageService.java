@@ -1,14 +1,10 @@
 package com.fullstack.ia.fullstackia.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fullstack.ia.fullstackia.Dto.PersonnageDTO;
+import com.fullstack.ia.fullstackia.DTO.PersonnageDTO;
 import com.fullstack.ia.fullstackia.Entity.PersonnageEntity;
-import com.fullstack.ia.fullstackia.Enum.Role;
-import com.fullstack.ia.fullstackia.Enum.Sexe;
 import com.fullstack.ia.fullstackia.Repository.PersonnageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

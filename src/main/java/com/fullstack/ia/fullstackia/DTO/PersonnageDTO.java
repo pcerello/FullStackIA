@@ -1,4 +1,4 @@
-package com.fullstack.ia.fullstackia.Dto;
+package com.fullstack.ia.fullstackia.DTO;
 
 import com.fullstack.ia.fullstackia.Enum.Role;
 import com.fullstack.ia.fullstackia.Enum.Sexe;

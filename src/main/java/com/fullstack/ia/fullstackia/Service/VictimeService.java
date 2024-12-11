@@ -1,7 +1,7 @@
 package com.fullstack.ia.fullstackia.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fullstack.ia.fullstackia.Dto.VictimeDTO;
+import com.fullstack.ia.fullstackia.DTO.VictimeDTO;
 import com.fullstack.ia.fullstackia.Entity.VictimeEntity;
 import com.fullstack.ia.fullstackia.Repository.VictimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
