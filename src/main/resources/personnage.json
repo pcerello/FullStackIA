@@ -1,10 +1,11 @@
 {
-  "nom": "Jules",
-  "prenom": "Maigret",
-  "age": 45,
+  "nom": "Toto",
+  "prenom": "Titi",
+  "age": 25,
   "sexe": "HOMME",
   "role": "SUSPECT",
   "caractere": "CALME",
-  "alibi": "Jules Maigret était chez lui, à la maison, au moment du crime.",
-  "mobile": "Jules Maigret n'avait aucune raison de commettre le crime."
+  "alibi": "J'étais chez moi à regarder la télévision.",
+  "mobile": "Je n'ai pas de mobile.",
+  "scenarioId": 1
 }

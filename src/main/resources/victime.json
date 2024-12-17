@@ -1,5 +1,15 @@
 {
-  "arme": "AUTRE",
+  "personnageDTO": {
+    "nom": "John",
+    "prenom": "Doe",
+    "age": 30,
+    "sexe": "HOMME",
+    "role": "VICTIME",
+    "caractere": "Gentil",
+    "alibi": "J'étais chez moi",
+    "mobile": "06 12 34 56 78"
+  },
+  "arme": "COUTEAU",
   "lieu": "Paris",
-  "description": "Empoisonnement dans un café."
+  "description": "Victime poignardée"
 }

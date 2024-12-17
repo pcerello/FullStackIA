@@ -5,6 +5,9 @@ import com.fullstack.ia.fullstackia.Enum.Sexe;
 import lombok.Builder;
 
 @Builder
-public record PersonnageDTO (String nom, String prenom, int age, Sexe sexe, Role role, String caractere, String alibi, String mobile) {
+public record PersonnageDTO (String nom, String prenom, int age, Sexe sexe, Role role, String caractere, String alibi, String mobile, long scenarioId) {
+    public Long getScenarioId() {
+        return scenarioId;
+    }
 
 }

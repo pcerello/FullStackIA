@@ -16,8 +16,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class VictimeService {
 
-    private VictimeRepository victimeRepository;
-    private ObjectMapper objectMapper;
+    private final VictimeRepository victimeRepository;
+
+    private final ObjectMapper objectMapper;
 
     public VictimeEntity creerVictimeDepuisJson(String filePath) throws IOException {
         // Lire le fichier JSON et mapper sur un DTO
@@ -36,9 +37,11 @@ public class VictimeService {
                 personnageDTO.caractere(),
                 personnageDTO.alibi(),
                 personnageDTO.mobile(),
+                personnageDTO.scenarioId(),
                 victimeDTO.arme(),
                 victimeDTO.lieu(),
                 victimeDTO.description()
+
         );
 
         // Sauvegarder l'entité dans la base de données
