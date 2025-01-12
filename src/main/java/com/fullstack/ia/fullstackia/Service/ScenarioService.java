@@ -19,8 +19,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class ScenarioService {
 
-    private ScenarioRepository scenarioRepository;
-    private ObjectMapper objectMapper;
+    private final ScenarioRepository scenarioRepository;
+    private final ObjectMapper objectMapper;
+
     public ScenarioEntity creerScenarioDepuisJson(String filePath) throws IOException {
         // Lire le fichier JSON et mapper sur un DTO
         File file = new File(filePath);
@@ -28,9 +29,13 @@ public class ScenarioService {
         ScenarioDTO scenarioDTO = objectMapper.readValue(file, ScenarioDTO.class);
 
         // Convertir le DTO en entité
-        ScenarioEntity scenarioEntity = new ScenarioEntity(
+        /*ScenarioEntity scenarioEntity = new ScenarioEntity(
                 scenarioDTO.description()
-        );
+        );*/
+
+        ScenarioEntity scenarioEntity = ScenarioEntity.builder()
+                .description(scenarioDTO.description())
+                .build();
 
         // Sauvegarder l'entité dans la base de données
         return scenarioRepository.save(scenarioEntity);

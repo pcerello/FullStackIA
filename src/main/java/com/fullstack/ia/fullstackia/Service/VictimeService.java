@@ -3,7 +3,9 @@ package com.fullstack.ia.fullstackia.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fullstack.ia.fullstackia.DTO.PersonnageDTO;
 import com.fullstack.ia.fullstackia.DTO.VictimeDTO;
+import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Entity.VictimeEntity;
+import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import com.fullstack.ia.fullstackia.Repository.VictimeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class VictimeService {
 
-    private VictimeRepository victimeRepository;
-    private ObjectMapper objectMapper;
+    private final VictimeRepository victimeRepository;
+    private final ScenarioRepository scenarioRepository;
+    private final ObjectMapper objectMapper;
 
     public VictimeEntity creerVictimeDepuisJson(String filePath) throws IOException {
         // Lire le fichier JSON et mapper sur un DTO
@@ -25,8 +28,10 @@ public class VictimeService {
         VictimeDTO victimeDTO = objectMapper.readValue(file, VictimeDTO.class);
         PersonnageDTO personnageDTO = victimeDTO.personnageDTO();
 
+        Long scenarioId = personnageDTO.scenario().getId(); // Assurez-vous que le DTO inclut un champ ou une méthode scenarioId
+        ScenarioEntity scenario = scenarioRepository.findById(scenarioId)
+                .orElseThrow(() -> new IllegalArgumentException("Scénario non trouvé pour l'ID : " + scenarioId));
 
-        // Convertir le DTO en entité
         VictimeEntity victimeEntity = new VictimeEntity(
                 personnageDTO.nom(),
                 personnageDTO.prenom(),
@@ -36,6 +41,7 @@ public class VictimeService {
                 personnageDTO.caractere(),
                 personnageDTO.alibi(),
                 personnageDTO.mobile(),
+                scenario,
                 victimeDTO.arme(),
                 victimeDTO.lieu(),
                 victimeDTO.description()

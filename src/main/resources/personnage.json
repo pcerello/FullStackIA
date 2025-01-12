@@ -1,10 +1,13 @@
 {
-  "nom": "Jules",
-  "prenom": "Maigret",
-  "age": 45,
+  "nom": "Dupont",
+  "prenom": "Jean",
+  "age": 35,
   "sexe": "HOMME",
-  "role": "SUSPECT",
-  "caractere": "CALME",
-  "alibi": "Jules Maigret était chez lui, à la maison, au moment du crime.",
-  "mobile": "Jules Maigret n'avait aucune raison de commettre le crime."
+  "role": "TEMOIN",
+  "caractere": "Calme",
+  "alibi": "Au cinéma à l'heure du crime",
+  "mobile": "Aucun conflit connu",
+  "scenario": {
+    "id": 1
+  }
 }

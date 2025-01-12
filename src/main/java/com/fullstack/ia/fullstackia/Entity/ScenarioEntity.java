@@ -14,11 +14,14 @@ import lombok.NoArgsConstructor;
 public class ScenarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique = true, nullable = false)
     private long id;
+
     private String description;
+
 
     public ScenarioEntity(String description) {
         this.description = description;
     }
+
+
 }

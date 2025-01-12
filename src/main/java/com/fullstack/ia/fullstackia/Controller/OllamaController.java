@@ -38,7 +38,7 @@ public class OllamaController {
     @PostMapping(path = "/generateHistory")
     public String askDoraAQuestion(@RequestParam String question) {
 
-        String prompt = fileReadingService.readInternalFileAsString("prompts/promptCreateScenario.txt") ;
+        String prompt = fileReadingService.readInternalFileAsString("prompts/prompt.txt") ;
 
         List<Message> messages = new ArrayList<>();
         messages.add(new SystemMessage("<start_of_turn>" + prompt + "<end_of_turn>")) ;

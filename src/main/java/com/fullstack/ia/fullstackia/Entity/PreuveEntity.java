@@ -15,17 +15,11 @@ import lombok.NoArgsConstructor;
 public class PreuveEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
     private long id;
     // Type de preuve materiel, lettre, objet personnel
     private String type;
-    // Permet valider ou invalider un temoiniage avec une preuve concrète
-    private String incriminant;
-    private String disculpant;
 
-    // Type de preuve materiel, lettre, objet personnel
-    @Enumerated(EnumType.STRING)
-    private PreuveMateriel preuveMateriel;
+    private String description;
 
     // Chaque témoignage doit pouvoir être comparé au preuves matériels
     @OneToOne

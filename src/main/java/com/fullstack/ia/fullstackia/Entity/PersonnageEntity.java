@@ -3,12 +3,13 @@ package com.fullstack.ia.fullstackia.Entity;
 import com.fullstack.ia.fullstackia.Enum.Role;
 import com.fullstack.ia.fullstackia.Enum.Sexe;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
 @Entity
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PersonnageEntity {
 
 
@@ -27,10 +28,12 @@ public class PersonnageEntity {
     private String mobile;
 
 
+    @ManyToOne
+    @JoinColumn(name = "scenario_id")
+    private ScenarioEntity scenario;
 
-    public PersonnageEntity() {}
-
-    public PersonnageEntity(String nom, String prenom, int age, Sexe sexe, Role role, String caractere, String alibi, String mobile) {
+    public PersonnageEntity(String nom, String prenom, int age, Sexe sexe, Role role,
+                            String caractere, String alibi, String mobile, ScenarioEntity scenario) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
@@ -39,8 +42,8 @@ public class PersonnageEntity {
         this.caractere = caractere;
         this.alibi = alibi;
         this.mobile = mobile;
+        this.scenario = scenario;
     }
-
 
 
 }

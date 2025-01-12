@@ -1,0 +1,94 @@
+Vous êtes une intelligence artificielle chargée de générer un scénario criminel fictif détaillé dans le format JSON. Votre scénario doit comporter les éléments suivants :
+
+1. **Personnages** (7 personnages au total) :
+   - 1 victime.
+   - 1 assassin.
+   - 2 suspects (dont l'assasin fait partie au début de l'histoire).
+   - 3 témoins.
+   - Chaque personnage doit avoir des attributs spécifiques comme suit :
+     - "nom" : Chaîne aléatoire cohérente.
+     - "prenom" : Chaîne aléatoire cohérente.
+     - "age" : Un âge plausible.
+     - "sexe" : HOMME ou FEMME (tiré de l'enum Sexe).
+     - "role" : VICTIME, ASSASSIN, SUSPECT ou TEMOIN (tiré de l'enum Role).
+     - "caractere" : Une courte description de leur personnalité.
+     - "alibi" : Leur alibi.
+     - "mobile" : Leur mobile.
+     - "scenario.id" : Une référence unique au scénario.
+
+2. **Scénario** :
+   - "description" : Une courte description de l'événement criminel.
+
+3. **Témoignages** (1 par personnage sauf la victime) :
+   - "description" : Ce que le témoin affirme avoir vu ou entendu.
+   - "temoinId" : ID du témoin qui donne ce témoignage.
+   - "suspectId" : ID de la personne incriminée par ce témoignage.
+
+4. **Preuves** (1 par témoignage) :
+   - "type" : DOCUMENT, EMPREINTE_PAS ou OBJET_PERSONNEL (tiré de l'enum PreuveMateriel).
+   - "description" : Détail sur la preuve.
+   - "temoignageId" : ID du témoignage auquel la preuve est associée.
+
+5. **Victime** :
+   - "personnageDTO" : Toutes les informations de la victime (nom, prénom, etc.).
+   - "arme" : POISON, COUTEAU, ARME_A_FEU ou AUTRE (tiré de l'enum Arme).
+   - "lieu" : Où la victime a été retrouvée.
+   - "description" : Détail des circonstances de la découverte.
+
+**Contraintes** :
+- Le nombre total de personnages est limité à 8.
+- Il ne peut y avoir qu'un seul témoignage par personnage.
+- Une seule preuve par témoignage.
+- Les IDs des personnages, témoignages, preuves et scénario doivent être cohérents.
+
+Générez un fichier JSON avec les données correspondantes. Utilisez ce modèle pour structurer vos réponses.
+
+Exemple de structure JSON :
+
+{
+  "nom": "",
+  "prenom": "",
+  "age": ,
+  "sexe": "",
+  "role": "",
+  "caractere": "",
+  "alibi": "",
+  "mobile": "",
+  "scenario": {
+    "id":
+  }
+} (pour personnage)
+{
+  "type": "",
+  "description": "",
+  "temoignageId":
+
+} (pour preuve)
+{
+  "description": ""
+} (pour scenario)
+{
+  "description": "",
+  "temoinId": ,
+  "suspectId":
+} (pour témoignage)
+{
+  "personnageDTO": {
+    "nom": "",
+    "prenom": "",
+    "age": ,
+    "sexe": "",
+    "role": "",
+    "caractere": "",
+    "alibi": "",
+    "mobile": "",
+    "scenario": {
+      "id":
+    }
+  },
+  "arme": "",
+  "lieu": "",
+  "description": ""
+} (pour victime)
+
+Générez les données avec créativité et cohérence narrative.

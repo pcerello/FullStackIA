@@ -3,19 +3,14 @@ import com.fullstack.ia.fullstackia.Enum.Arme;
 import com.fullstack.ia.fullstackia.Enum.Role;
 import com.fullstack.ia.fullstackia.Enum.Sexe;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
 @Entity
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class VictimeEntity extends PersonnageEntity{
-    // Getters et Setters
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Pour auto-générer l'ID
-    private Long id;
 
     @Enumerated(EnumType.STRING)
     private Arme arme;
@@ -23,13 +18,22 @@ public class VictimeEntity extends PersonnageEntity{
     private String lieu;
 
     private String description;
-    // Constructeurs
-    public VictimeEntity() {}
 
-    public VictimeEntity(String nom, String prenom, int age, Sexe sexe, Role role,
-                         String caractere, String alibi, String mobile,
-                         Arme arme, String lieu, String description) {
-        super(nom, prenom, age, sexe, role, caractere, alibi, mobile);
+    public VictimeEntity(
+            String nom,
+            String prenom,
+            int age,
+            Sexe sexe,
+            Role role,
+            String caractere,
+            String alibi,
+            String mobile,
+            ScenarioEntity scenario,
+            Arme arme,
+            String lieu,
+            String description
+    ) {
+        super(nom, prenom, age, sexe, role, caractere, alibi, mobile, scenario); // Appel au constructeur parent
         this.arme = arme;
         this.lieu = lieu;
         this.description = description;
