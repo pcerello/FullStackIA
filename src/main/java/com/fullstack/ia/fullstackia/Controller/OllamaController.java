@@ -66,10 +66,4 @@ public class OllamaController {
             throw new RuntimeException("Erreur lors de l'importation du personnage : " + e.getMessage(), e);
         }
     }
-
-
-
-
-
-
 }

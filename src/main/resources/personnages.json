@@ -1,0 +1,28 @@
+[
+  {
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "age": 35,
+    "sexe": "HOMME",
+    "role": "SUSPECT",
+    "caractere": "Calme",
+    "alibi": "Etait au cinéma à l'heure du crime.",
+    "mobile": "Argent",
+    "scenario": {
+      "id": 1
+    }
+  },
+  {
+    "nom": "Martin",
+    "prenom": "Claire",
+    "age": 28,
+    "sexe": "FEMME",
+    "role": "VICTIME",
+    "caractere": "Gentille",
+    "alibi": "N/A",
+    "mobile": "N/A",
+    "scenario": {
+      "id": 1
+    }
+  }
+]
