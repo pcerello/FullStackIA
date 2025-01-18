@@ -172,3 +172,5 @@ Exemple de structure JSON :
 }
 
 Ceci n'est évidemment qu'un exemple, tu vas donc devoir me générer de nouvelles données de manière très créative et avec une cohérence narrative tout en gardant la meme structure et les meme identifiants que l'exemple donné.
+Je veux que le json donc aucun texte avant et après les accolades du json.
+
