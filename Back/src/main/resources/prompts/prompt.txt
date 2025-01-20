@@ -1,0 +1,176 @@
+Vous êtes une intelligence artificielle chargée de générer un scénario criminel fictif détaillé dans le format JSON. Le scénario doit comporter les éléments suivants :
+
+1. **Personnages** (5 personnages au total) :
+   - 1 victime.
+   - 1 assassin.
+   - 1 suspects (dont l'assasin fait partie au début de l'histoire).
+   - 2 témoins.
+   - Chaque personnage doit avoir des attributs spécifiques comme suit :
+     - "nom" : Chaîne aléatoire cohérente.
+     - "prenom" : Chaîne aléatoire cohérente.
+     - "age" : Un âge plausible.
+     - "sexe" : HOMME ou FEMME (tiré de l'enum Sexe).
+     - "role" : VICTIME, ASSASSIN, SUSPECT ou TEMOIN (tiré de l'enum Role).
+     - "caractere" : Une courte description de leur personnalité.
+     - "alibi" : Leur alibi.
+     - "mobile" : Leur mobile.
+     - "scenario.id" : Une référence unique au scénario.
+
+2. **Scénario** :
+   - "description" : Une courte description de l'événement criminel.
+
+3. **Témoignages** (1 par personnage sauf la victime) :
+   - "description" : Ce que le témoin affirme avoir vu ou entendu.
+   - "temoinId" : ID du témoin qui donne ce témoignage.
+   - "suspectId" : ID de la personne incriminée par ce témoignage.
+
+4. **Preuves** (1 par témoignage) :
+   - "type" : DOCUMENT, EMPREINTE_PAS ou OBJET_PERSONNEL (tiré de l'enum PreuveMateriel).
+   - "description" : Détail sur la preuve.
+   - "temoignageId" : ID du témoignage auquel la preuve est associée.
+
+5. **Victime** :
+   - "personnageDTO" : Toutes les informations de la victime (nom, prénom, etc.).
+   - "arme" : POISON, COUTEAU, ARME_A_FEU ou AUTRE (tiré de l'enum Arme).
+   - "lieu" : Où la victime a été retrouvée.
+   - "description" : Détail des circonstances de la découverte.
+
+**Contraintes** :
+- Le nombre total de personnages est limité à 8.
+- Il ne peut y avoir qu'un seul témoignage par personnage.
+- Une seule preuve par témoignage.
+- Les IDs des personnages, témoignages, preuves et scénario doivent être cohérents.
+
+Générez un fichier JSON avec les données correspondantes. Utilisez ce modèle pour structurer vos réponses.
+
+Exemple de structure JSON :
+
+{
+  "scenario": {
+    "id": 1,
+    "description": "Un crime mystérieux s'est déroulé dans un manoir isolé. La victime a été retrouvée sans vie dans la bibliothèque."
+  },
+  "personnages": [
+    {
+      "id": 1,
+      "nom": "Dupont",
+      "prenom": "Jean",
+      "age": 45,
+      "sexe": "HOMME",
+      "role": "VICTIME",
+      "caractere": "Intelligent mais solitaire",
+      "alibi": "Aucun",
+      "mobile": "Aucun",
+      "scenario": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "nom": "Martin",
+      "prenom": "Claire",
+      "age": 30,
+      "sexe": "FEMME",
+      "role": "ASSASSIN",
+      "caractere": "Manipulatrice et calculatrice",
+      "alibi": "Était dans la cuisine à l'heure du crime",
+      "mobile": "Héritage financier",
+      "scenario": {
+        "id": 1
+      }
+    },
+    {
+      "id": 3,
+      "nom": "Durand",
+      "prenom": "Marc",
+      "age": 50,
+      "sexe": "HOMME",
+      "role": "SUSPECT",
+      "caractere": "Colérique et rancunier",
+      "alibi": "Discutait au téléphone avec un ami",
+      "mobile": "Vengeance",
+      "scenario": {
+        "id": 1
+      }
+    },
+    {
+      "id": 4,
+      "nom": "Leclerc",
+      "prenom": "Sophie",
+      "age": 35,
+      "sexe": "FEMME",
+      "role": "TEMOIN",
+      "caractere": "Curieuse et perspicace",
+      "alibi": "A vu quelque chose depuis la fenêtre",
+      "mobile": "N/A",
+      "scenario": {
+        "id": 1
+      }
+    },
+    {
+      "id": 5,
+      "nom": "Bernard",
+      "prenom": "Luc",
+      "age": 28,
+      "sexe": "HOMME",
+      "role": "TEMOIN",
+      "caractere": "Timide mais observateur",
+      "alibi": "Était dans le jardin à l'heure du crime",
+      "mobile": "aucun",
+      "scenario": {
+        "id": 1
+      }
+    }
+  ],
+  "victime": {
+    "personnageDTO": {
+      "id": 1,
+      "nom": "Dupont",
+      "prenom": "Jean",
+      "age": 45,
+      "sexe": "HOMME",
+      "role": "VICTIME",
+      "caractere": "Intelligent mais solitaire",
+      "alibi": "Aucun",
+      "mobile": "Aucun",
+      "scenario": {
+        "id": 1
+      }
+    },
+    "arme": "COUTEAU",
+    "lieu": "Bibliothèque",
+    "description": "La victime a été retrouvée poignardée près de l'étagère centrale. L'arme du crime était encore sur les lieux."
+  },
+  "temoignages": [
+    {
+      "id": 1,
+      "description": "J'ai vu une silhouette entrer dans la bibliothèque juste avant le cri.",
+      "temoinId": 4,
+      "suspectId": 3
+    },
+    {
+      "id": 2,
+      "description": "J'ai entendu des éclats de voix dans la bibliothèque peu avant le drame.",
+      "temoinId": 5,
+      "suspectId": 2
+    }
+  ],
+  "preuves": [
+    {
+      "id": 1,
+      "type": "OBJET_PERSONNEL",
+      "description": "Un gant taché de sang retrouvé près de la scène du crime.",
+      "temoignageId": 1
+    },
+    {
+      "id": 2,
+      "type": "DOCUMENT",
+      "description": "Une lettre de menace adressée à la victime, retrouvée dans le bureau de l'assassin.",
+      "temoignageId": 2
+    }
+  ]
+}
+
+Ceci n'est évidemment qu'un exemple, tu vas donc devoir me générer de nouvelles données de manière très créative et avec une cohérence narrative tout en gardant la meme structure et les meme identifiants que l'exemple donné.
+Je veux que le json donc aucun texte avant et après les accolades du json.
+

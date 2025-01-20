@@ -1,0 +1,18 @@
+{
+  "personnageDTO": {
+    "nom": "Doe",
+    "prenom": "Jane",
+    "age": 30,
+    "sexe": "FEMME",
+    "role": "VICTIME",
+    "caractere": "Timide",
+    "alibi": "Elle était chez elle",
+    "mobile": "Aucun mobile connu",
+    "scenario": {
+      "id": 1
+    }
+  },
+  "arme": "COUTEAU",
+  "lieu": "Chambre à coucher",
+  "description": "La victime a été retrouvée avec plusieurs blessures au couteau."
+}
