@@ -52,18 +52,4 @@ public class OllamaController {
 
         return message ;
     }
-
-    //Méthode qui permet de remplir la BDD
-    @PostMapping("/insertion")
-    public void insertionDonneeDepuisJson(@RequestParam String filePath) {
-        try {
-             personnageService.creerPersonnageDepuisJson(filePath);
-             victimeService.creerVictimeDepuisJson(filePath);
-             temoignageService.creerTemoignageDepuisJson(filePath);
-             preuveService.creerPreuveDepuisJson(filePath);
-             scenarioService.creerScenarioDepuisJson(filePath);
-        } catch (Exception e) {
-            throw new RuntimeException("Erreur lors de l'importation du personnage : " + e.getMessage(), e);
-        }
-    }
 }

@@ -16,6 +16,7 @@ public class TemoignageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Lob
     private String description;
 
     @ManyToOne
@@ -27,4 +28,8 @@ public class TemoignageEntity {
     @JoinColumn(name="suspect_id")
     // Personnage avec le role TEMOIN
     private PersonnageEntity suspect;
+
+    @ManyToOne
+    @JoinColumn(name="scenario_id")
+    private ScenarioEntity scenario;
 }

@@ -28,17 +28,26 @@ public class ScenarioService {
 
         ScenarioDTO scenarioDTO = objectMapper.readValue(file, ScenarioDTO.class);
 
-        // Convertir le DTO en entité
-        /*ScenarioEntity scenarioEntity = new ScenarioEntity(
-                scenarioDTO.description()
-        );*/
-
         ScenarioEntity scenarioEntity = ScenarioEntity.builder()
                 .description(scenarioDTO.description())
                 .build();
 
         // Sauvegarder l'entité dans la base de données
         return scenarioRepository.save(scenarioEntity);
+    }
+
+    public void saveGeneratedScenario(String scenarioDescription) {
+        // Créer une nouvelle entité et la sauvegarder
+        ScenarioEntity scenarioEntity = ScenarioEntity.builder()
+                .description(scenarioDescription)
+                .build();
+
+        scenarioRepository.save(scenarioEntity);
+    }
+
+    public ScenarioEntity getLastInsertedScenario() {
+        return scenarioRepository.findTopByOrderByIdDesc()
+                .orElseThrow(() -> new IllegalArgumentException("Aucun scénario trouvé dans la base de données."));
     }
 
 }

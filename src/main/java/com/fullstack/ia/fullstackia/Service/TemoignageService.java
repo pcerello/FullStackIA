@@ -5,6 +5,7 @@ import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
 import com.fullstack.ia.fullstackia.Entity.PersonnageEntity;
 import com.fullstack.ia.fullstackia.Entity.TemoignageEntity;
 import com.fullstack.ia.fullstackia.Repository.PersonnageRepository;
+import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import com.fullstack.ia.fullstackia.Repository.TemoignageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class TemoignageService {
     private final TemoignageRepository temoignageRepository;
     private final ObjectMapper objectMapper;
     private final PersonnageRepository temoinRepository;
+    private final ScenarioRepository scenarioRepository;
 
     public TemoignageEntity creerTemoignageDepuisJson(String filePath) throws IOException {
         // Lire le fichier JSON et mapper sur un DTO
@@ -43,4 +45,17 @@ public class TemoignageService {
         // Sauvegarder l'entité dans la base de données
         return temoignageRepository.save(temoignageEntity);
     }
+
+    public void saveGeneratedTemoignages(String description, Long scenarioId){
+        TemoignageEntity temoignageEntity =  TemoignageEntity.builder()
+                .description(description)
+                .scenario(scenarioRepository.findById(scenarioId).orElseThrow(() -> new IllegalArgumentException("Scenario non trouvé pour l'ID : " + scenarioId)))
+                .build();
+        temoignageRepository.save(temoignageEntity);
+    }
+
+    public List<TemoignageEntity> getTemoignagesByScenarioId(Long scenarioId) {
+        return temoignageRepository.findByScenarioId(scenarioId);
+    }
+
 }
