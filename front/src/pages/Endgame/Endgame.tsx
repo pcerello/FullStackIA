@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.tsx";
 
 function Endgame() {
   return (
-    <div className="App">
+    <div className="Endgame">
       <Header />
       <div className="Body">
         <img src={enqueteImage} alt="logo" />

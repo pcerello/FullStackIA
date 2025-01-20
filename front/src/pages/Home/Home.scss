@@ -1,12 +1,67 @@
 .Body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 88px - 64px);
-    background-color: #161616;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 88px - 64px);
+  background-color: #161616;
+  position: relative;
+  text-align: center;
 
-    img {
+  .background-image {
+    width: 100%;
+    height: auto;
+  }
+  .form-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6); // Fond semi-transparent
+    padding: 30px;
+    border-radius: 10px;
+    color: white;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+
+      input {
         width: 100%;
-        height: auto;
-    }
+        padding: 15px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: #fff;
+        color: #333;
+
+        &::placeholder {
+            color: #888;
+          }
+      }
+
+      button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        background-color: #0779CE; 
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #055C8B; // Couleur bleue pour le bouton
+          }
+      }
+  }
 }
