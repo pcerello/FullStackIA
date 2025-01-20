@@ -18,11 +18,4 @@ public class ScenarioEntity {
 
     @Lob
     private String description;
-
-
-    public ScenarioEntity(String description) {
-        this.description = description;
-    }
-
-
 }

@@ -20,16 +20,6 @@ public class TemoignageEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="temoin_id")
-    // Personnage avec le role TEMOIN
-    private PersonnageEntity temoin;
-
-    @ManyToOne
-    @JoinColumn(name="suspect_id")
-    // Personnage avec le role TEMOIN
-    private PersonnageEntity suspect;
-
-    @ManyToOne
     @JoinColumn(name="scenario_id")
     private ScenarioEntity scenario;
 }
