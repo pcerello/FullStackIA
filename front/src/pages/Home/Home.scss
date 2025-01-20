@@ -1,0 +1,12 @@
+.Body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 88px - 64px);
+    background-color: #161616;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
