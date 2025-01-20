@@ -1,0 +1,60 @@
+    ```json
+    [
+      {
+        "nom": "Dumont",
+        "prenom": "Marie",
+        "age": 27,
+        "sexe": "femme",
+        "status": "victime"
+      },
+      {
+        "nom": "Leclerc",
+        "prenom": "Pierre",
+        "age": 45,
+        "sexe": "homme",
+        "status": "suspect"
+      },
+      {
+        "nom": "Girard",
+        "prenom": "Sophie",
+        "age": 32,
+        "sexe": "femme",
+        "status": "témoin"
+      },
+      {
+        "nom": "Durand",
+        "prenom": "Marc",
+        "age": 38,
+        "sexe": "homme",
+        "status": "suspect"
+      },
+      {
+        "nom": "Briand",
+        "prenom": "Léo",
+        "age": 62,
+        "sexe": "homme",
+        "status": "suspect"
+      },
+      {
+        "nom": "Bertrand",
+        "prenom": "Julie",
+        "age": 21,
+        "sexe": "femme",
+        "status": "témoin"
+      },
+      {
+        "nom": "Rousseau",
+        "prenom": "Nicolas",
+        "age": 28,
+        "sexe": "homme",
+        "status": "suspect"
+      },
+      {
+        "nom": "Moreau",
+        "prenom": "Emmanuelle",
+        "age": 49,
+        "sexe": "femme",
+        "status": "témoin"
+      }
+    ]
+    ```

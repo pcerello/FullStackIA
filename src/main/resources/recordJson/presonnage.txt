@@ -1,0 +1,55 @@
+```
+[
+{
+"nom": "Dupont",
+"prenom": "Étienne",
+"age": 42,
+"sexe": "HOMME",
+"role": "suspect"
+},
+{
+"nom": "Dubois",
+"prenom": "Léa",
+"age": 31,
+"sexe": "FEMME",
+"role": "témoin"
+},
+{
+"nom": "Martin",
+"prenom": "Nicolas",
+"age": 75,
+"sexe": "HOMME",
+"role": "suspect"
+},
+{
+"nom": "Garcia",
+"prenom": "Juliette",
+"age": 29,
+"sexe": "FEMME",
+"role": "témoin"
+},
+{
+"nom": "Pierre",
+"prenom": "Louis",
+"age": 51,
+"sexe": "HOMME",
+"role": "suspect"
+},
+{
+"nom": "Clementine",
+"prenom": "Sarah",
+"age": 38,
+"sexe": "FEMME",
+"role": "témoin"
+},
+{
+"nom": "Dupont",
+"prenom": "Pierre",
+"age": 63,
+"sexe": "HOMME",
+"role": "victime"
+}
+]
+```
+
+<end_of_turn>

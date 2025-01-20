@@ -1,4 +1,6 @@
 package com.fullstack.ia.fullstackia.Controller;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fullstack.ia.fullstackia.Service.FileReadingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.messages.Message;
@@ -9,19 +11,17 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/model")
+@RequestMapping(path = "/")
 @RequiredArgsConstructor
 public class OllamaController {
 
@@ -57,35 +57,25 @@ public class OllamaController {
 
     }
 
-
     @PostMapping(path = "/create-characters")
-    public String askCreateCharacters() {
+    public String askCreateCharacters() throws IOException {
 
-        String unformatJson =  mainIaAskingFunction("/prompts/promptCreateCharacteres.txt");
+        String fileContent = mainIaAskingFunction("/prompts/promptCreateCharacteres.txt");
 
-        return unformatJson;
+        int start = fileContent.indexOf("[");
+        int end = fileContent.indexOf("]");
 
-//        // Recuperer uniquement ce qui est dans la liste
-//        int startList = unformatJson.indexOf("[");
-//        int endList = unformatJson.indexOf("]");
-//        String jsonArrayContent  = unformatJson.substring(startList + 1, endList).trim();
-//        String[]  jsonElements = jsonArrayContent.split(",");
-//        List<String> jsonContent = Arrays.asList(jsonElements);
-//
-//        return jsonContent.stream().collect(Collectors.joining(""));
-
-
-
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/recordJson/characters.json"))) {
-//            writer.write(jsonContent);
-//            return "Le json a bien été enregistré";
-//
-//        } catch (IOException e) {
-////            throw new RuntimeException(e);
-//            return "Problème lors de l'enregistrement du Json";
+//        if (start < fileContent.length() && end <= fileContent.length() && start < end) {
+        String substring = fileContent.substring(start, end + 1);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonNode = mapper.readTree(substring);
+        String name = jsonNode.get("name").asText();
+        int age = jsonNode.get("age").asInt();
+        return "Name : " + name + " Age : " + age ;
+//        } else {
+//            return "Les indices sont invalides.";
 //        }
 
     }
-
 
 }

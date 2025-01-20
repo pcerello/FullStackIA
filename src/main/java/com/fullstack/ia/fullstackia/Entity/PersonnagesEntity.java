@@ -1,5 +1,6 @@
 package com.fullstack.ia.fullstackia.Entity;
 
+import com.fullstack.ia.fullstackia.Dto.PersonnageDto;
 import com.fullstack.ia.fullstackia.Enum.Role;
 import com.fullstack.ia.fullstackia.Enum.Sexe;
 import jakarta.persistence.*;
@@ -38,5 +39,5 @@ public class PersonnagesEntity {
     @OneToMany(mappedBy = "suspect", cascade = CascadeType.ALL)
     // Accusation sur un suspect
     private List<TemoignageEntity> temoignagesRecus;
-    
+
 }
