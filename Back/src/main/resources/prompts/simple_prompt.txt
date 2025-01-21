@@ -21,6 +21,7 @@ Caractère : Une courte description de leur personnalité (par ex. "timide et ob
 Alibi (pour les suspects uniquement) : Une justification plausible de leurs actions au moment du crime.
 Mobile (pour les suspects uniquement) : La raison potentielle pour laquelle ils pourraient être impliqués dans le crime.
 je voudrais que tu expose chacun des perssonages
+Je ne veux pas que tu dévoile le coupable.
 
 4. Cohérence et créativité :
 L’histoire doit être captivante et avoir un fil conducteur clair reliant les personnages au crime.
