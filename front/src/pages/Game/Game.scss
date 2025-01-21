@@ -1,0 +1,10 @@
+.Body-game {
+    flex-direction: column;
+    color: white;
+    align-items: flex-start;
+    padding: 32px;
+    height: calc(100vh - 88px - 64px - 64px);
+    display: flex;
+    background-color: #161616;
+    position: relative;
+}

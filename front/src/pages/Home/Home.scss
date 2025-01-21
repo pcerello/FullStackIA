@@ -1,4 +1,4 @@
-.Body {
+.Body-home {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,11 +6,9 @@
   background-color: #161616;
   position: relative;
   text-align: center;
+  background: url('../../assets/enquete.png') no-repeat center center fixed;
+  background-size: contain;
 
-  .background-image {
-    width: 100%;
-    height: auto;
-  }
   .form-overlay {
     position: absolute;
     top: 50%;
