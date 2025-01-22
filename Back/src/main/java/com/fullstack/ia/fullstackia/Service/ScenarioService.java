@@ -21,11 +21,7 @@ public class ScenarioService {
         String prompt = fileReadingService.readInternalFileAsString("prompts/simple_prompt.txt");
         String response = aiService.appelOllama(question,prompt);
         saveGeneratedScenario(response);
-        String text = "Scénario généré et sauvegardé : " + response;
 
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode jsonNode = mapper.createObjectNode();
-        jsonNode.put("scenario", text);
 
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode jsonNode = mapper.createObjectNode();
