@@ -17,7 +17,7 @@ public class ScenarioService {
     private final AIService aiService;
     private final FileReadingService fileReadingService;
 
-    public String genererScenario(String question)  throws JsonProcessingException {
+    public String genererScenario(String question) throws JsonProcessingException {
         String prompt = fileReadingService.readInternalFileAsString("prompts/simple_prompt.txt");
         String response = aiService.appelOllama(question,prompt);
         saveGeneratedScenario(response);
@@ -27,7 +27,12 @@ public class ScenarioService {
         ObjectNode jsonNode = mapper.createObjectNode();
         jsonNode.put("scenario", text);
 
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode jsonNode = mapper.createObjectNode();
+        jsonNode.put("scenario", response);
+
         return mapper.writeValueAsString(jsonNode);
+
     }
 
     public void saveGeneratedScenario(String scenarioDescription) {

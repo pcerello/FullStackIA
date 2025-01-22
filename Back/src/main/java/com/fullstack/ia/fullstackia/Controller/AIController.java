@@ -1,13 +1,12 @@
 package com.fullstack.ia.fullstackia.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
 import com.fullstack.ia.fullstackia.Service.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping()
@@ -21,12 +20,14 @@ public class AIController {
     private final FileReadingService fileReadingService;
 
     @PostMapping("/genererScenario")
-    public String genererScenario(@RequestParam String question)  throws JsonProcessingException{
-        return scenarioService.genererScenario(question);
+    public String genererScenario(@RequestParam String question) throws JsonProcessingException {
+        String scenarioPublique = scenarioService.genererScenario(question);
+        scenarioPriveService.genererScenarioPrive(scenarioPublique,"");// je met la question à vide car on l'a déjà fourni la question à Ollama pour générer le scénario publique, on en a pas besoin pour le scénario privé
+        return scenarioPublique;
     }
 
     @PostMapping(path = "/genererTemoignages")
-    public String genererTemoignagesPourScenario(@RequestParam String question) {
+    public String genererTemoignagesPourScenario(@RequestParam String question) throws JsonProcessingException{
         return temoignageService.genererTemoignages(question);
     }
 
@@ -35,11 +36,10 @@ public class AIController {
         return evaluationService.evaluerReponse(userResponse);
     }
 
-    @PostMapping(path="testJson")
-    public JsonNode testJson() throws JsonProcessingException {
-        String substring = fileReadingService.readInternalFileAsString("prompts/test.json");
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonObject = mapper.readTree(substring);
-        return jsonObject;
+    @GetMapping("/temoignages/{scenarioId}")
+    public ResponseEntity<List<TemoignageDTO>> getTemoignagesByScenario(@PathVariable Long scenarioId) {
+        List<TemoignageDTO> temoignages = temoignageService.getTempoignagesByIdScenarioById(scenarioId);
+        return ResponseEntity.ok(temoignages);
     }
+
 }
