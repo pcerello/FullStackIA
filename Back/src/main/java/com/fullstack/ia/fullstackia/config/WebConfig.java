@@ -14,4 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")  // Adresse de ton application React
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
+
+//    public void nothing() {
+
+//    }
+
 }

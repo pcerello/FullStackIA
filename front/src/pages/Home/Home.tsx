@@ -16,8 +16,13 @@ function Home() {
     event.preventDefault();
     // Logic to start the game with the entered theme
     console.log("Thème de l'enquête :", theme);
-    // Redirect to the game page using React Router's navigate
+
+    // Appeler le serveur pour recuperer le scenario
+    // Mettre un loader
+    // Attendre le retour du Json du serveur
+    // Rediriger sur la page GAME en Post avec le json
     navigate("/game");
+
   };
 
   return (
