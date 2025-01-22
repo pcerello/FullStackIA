@@ -1,5 +1,8 @@
 package com.fullstack.ia.fullstackia.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Entity.TemoignageEntity;
@@ -21,7 +24,7 @@ public class TemoignageService {
     private final AIService aiService;
     private final ScenarioService scenarioService;
 
-    public String genererTemoignages(String question){
+    public String genererTemoignages(String question) throws JsonProcessingException {
         try {
             // récupérer le dernier scénario en base
             ScenarioEntity lastScenario = scenarioService.getLastInsertedScenario();
@@ -38,7 +41,11 @@ public class TemoignageService {
             String response =aiService.appelOllama(question,prompt);
             saveGeneratedTemoignages(response, lastScenario.getId());
 
-            return response;
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode jsonNode = mapper.createObjectNode();
+            jsonNode.put("scenario", response);
+
+            return mapper.writeValueAsString(jsonNode);
 
         } catch (Exception e) {
             e.printStackTrace();

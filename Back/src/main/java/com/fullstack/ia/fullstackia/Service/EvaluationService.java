@@ -1,5 +1,7 @@
 package com.fullstack.ia.fullstackia.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fullstack.ia.fullstackia.Entity.EvaluationEntity;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Entity.ScenarioPriveEntity;
@@ -52,8 +54,12 @@ public class EvaluationService {
 
             String evaluation = aIService.appelOllama(userResponse,prompt);
             saveGeneratedEvaluation(evaluation);
-            // Retourner l'évaluation
-            return evaluation;
+
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode jsonNode = mapper.createObjectNode();
+            jsonNode.put("scenario", evaluation);
+
+            return mapper.writeValueAsString(jsonNode);
 
         } catch (Exception e) {
             e.printStackTrace();

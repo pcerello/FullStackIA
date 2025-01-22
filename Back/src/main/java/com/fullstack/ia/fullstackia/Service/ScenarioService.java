@@ -1,5 +1,8 @@
 package com.fullstack.ia.fullstackia.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +17,17 @@ public class ScenarioService {
     private final AIService aiService;
     private final FileReadingService fileReadingService;
 
-    public String genererScenario(String question){
+    public String genererScenario(String question) throws JsonProcessingException {
         String prompt = fileReadingService.readInternalFileAsString("prompts/simple_prompt.txt");
         String response = aiService.appelOllama(question,prompt);
         saveGeneratedScenario(response);
 
-        return "Scénario généré et sauvegardé : " + response;
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode jsonNode = mapper.createObjectNode();
+        jsonNode.put("scenario", response);
+
+        return mapper.writeValueAsString(jsonNode);
+
     }
 
     public void saveGeneratedScenario(String scenarioDescription) {
