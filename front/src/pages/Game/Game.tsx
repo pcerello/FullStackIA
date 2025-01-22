@@ -2,6 +2,7 @@ import React from "react";
 import "./Game.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import ApiService from "../../services/ApiService";
 import accusationImage from "../../assets/accusation.png";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -14,6 +15,8 @@ function Game() {
   const navigate = useNavigate();
   const [temoin, setTemoin] = useState("");
   const [coupable, setCoupable] = useState("");
+  const [isModal, setIsModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const data = location.state;
 
@@ -25,19 +28,48 @@ function Game() {
     setCoupable(event.target.value);
   };
 
+  async function fetchDataTemoin(request: String) {
+    try {
+        setIsModal(true);
+        console.log("Waiting ...");
+        const data = await ApiService.post("genererTemoignages", request);
+        console.log(data);
+    } catch (error) {
+        console.error("Erreur lors de l'appel API :", error);
+    } finally {
+      setIsModal(false);
+    }
+  }
+
+  async function fetchDataCoupable(request: String) {
+    try {
+        setIsLoading(true);
+        console.log("Waiting ...");
+        const data = await ApiService.post("evaluationReponseUtilisateur", request);
+        console.log(data);
+        navigate("/endgame", { state: data });
+    } catch (error) {
+        console.error("Erreur lors de l'appel API :", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const handleTemoinSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // Logic to start the game with the entered theme
-    console.log("Appel au temoi :", temoin);
+    console.log("Interrogatoire de :", temoin);
     // Redirect to the game page using React Router's navigate
+    fetchDataTemoin(temoin);
     // navigate("/endgame");
   };
 
   const handleCoupableSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // Logic to start the game with the entered theme
-    console.log("Le coupable est :", coupable);
+    console.log("J'accuse :", coupable);
     // Redirect to the game page using React Router's navigate
+    fetchDataCoupable(coupable);
     // navigate("/endgame");
   };
 
@@ -84,7 +116,13 @@ function Game() {
                    value={coupable}
                    onChange={handleCoupableChange}
                    placeholder="Qui est le coupable ?" />
-            <button type="submit">Accuser</button>
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <span className="loader">Attendez... longtemps... très longtemps...</span>
+                ) : (
+                  "Accuser"
+                )}
+              </button>
           </form>
         </div>
         </div>

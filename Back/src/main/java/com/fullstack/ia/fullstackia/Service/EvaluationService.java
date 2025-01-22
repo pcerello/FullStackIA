@@ -57,7 +57,7 @@ public class EvaluationService {
 
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode jsonNode = mapper.createObjectNode();
-            jsonNode.put("scenario", evaluation);
+            jsonNode.put("accusation", evaluation);
 
             return mapper.writeValueAsString(jsonNode);
 

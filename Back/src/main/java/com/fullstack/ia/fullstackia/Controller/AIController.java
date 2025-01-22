@@ -29,12 +29,12 @@ public class AIController {
     }
 
     @PostMapping(path = "/genererTemoignages")
-    public String genererTemoignagesPourScenario(@RequestParam String question) throws JsonProcessingException{
+    public String genererTemoignagesPourScenario(@RequestBody String question) throws JsonProcessingException{
         return temoignageService.genererTemoignages(question);
     }
 
     @PostMapping(path = "/evaluationReponseUtilisateur")
-    public String evaluationReponseUtilisateur(@RequestParam String userResponse) {
+    public String evaluationReponseUtilisateur(@RequestBody String userResponse) {
         return evaluationService.evaluerReponse(userResponse);
     }
 

@@ -43,7 +43,7 @@ public class TemoignageService {
 
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode jsonNode = mapper.createObjectNode();
-            jsonNode.put("scenario", response);
+            jsonNode.put("temoignage", response);
 
             return mapper.writeValueAsString(jsonNode);
 
