@@ -1,8 +1,5 @@
 package com.fullstack.ia.fullstackia.Controller;
-import com.fullstack.ia.fullstackia.DTO.EvaluationDTO;
-import com.fullstack.ia.fullstackia.DTO.QuestionDTO;
-import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
-import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
+import com.fullstack.ia.fullstackia.DTO.*;
 import com.fullstack.ia.fullstackia.Service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,13 @@ public class AIController {
     private final ScenarioService scenarioService;
     private final ScenarioPriveService scenarioPriveService;
     private final EvaluationService evaluationService;
-    private final FileReadingService fileReadingService;
+
+    @PostMapping("/test")
+    public QuestionDTOClass test(@RequestBody QuestionDTOClass questionDTO) {
+        System.out.println("je suis la");
+        System.out.println("test de : " + questionDTO);
+        return questionDTO;
+    }
 
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
