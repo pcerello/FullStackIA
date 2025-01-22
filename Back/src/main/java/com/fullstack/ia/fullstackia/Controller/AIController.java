@@ -20,23 +20,19 @@ public class AIController {
 
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
-        //String scenarioPublique = scenarioService.genererScenario(question);
-        //System.out.println(questionDTO.question());
         ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.question());
-        //System.out.println("public scenario generated"+scenarioPublique.getBody());
         scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),""); //je met la quetion à vide pour le scénario caché car cette question est déjà fournie pour la génération du scénario publique
-        //System.out.println("private scenario generated");
         return scenarioPublique;
     }
 
     @PostMapping(path = "/genererTemoignages")
-    public ResponseEntity<TemoignageDTO> genererTemoignagesPourScenario(@RequestParam String question){
-        return temoignageService.genererTemoignages(question);
+    public ResponseEntity<TemoignageDTO> genererTemoignagesPourScenario(@RequestBody QuestionDTO questionDTO){
+        return temoignageService.genererTemoignages(questionDTO.question());
     }
 
     @PostMapping(path = "/evaluationReponseUtilisateur")
-    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestParam String userResponse) {
-        return evaluationService.evaluerReponse(userResponse);
+    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse) {
+        return evaluationService.evaluerReponse(userResponse.question());
     }
 
     @GetMapping("/temoignages/{scenarioId}")
