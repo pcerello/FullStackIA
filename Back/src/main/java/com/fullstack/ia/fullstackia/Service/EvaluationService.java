@@ -52,14 +52,6 @@ public class EvaluationService {
 
         String evaluation = aIService.appelOllama(userResponse, prompt);
 
-        /**
-         saveGeneratedEvaluation(evaluation);
-
-         ObjectMapper mapper = new ObjectMapper();
-         ObjectNode jsonNode = mapper.createObjectNode();
-         jsonNode.put("scenario", evaluation);
-
-         return mapper.writeValueAsString(jsonNode);**/
         return saveGeneratedEvaluation(evaluation);
     }
     public ResponseEntity<EvaluationDTO> saveGeneratedEvaluation(String description){

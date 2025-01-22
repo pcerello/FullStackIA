@@ -1,8 +1,5 @@
 package com.fullstack.ia.fullstackia.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Entity.TemoignageEntity;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -36,16 +32,6 @@ public class TemoignageService {
                 "Tu ne dois pas dépasser les 200 caractères";
 
         String response =aiService.appelOllama(question,prompt);
-
-        /**
-        saveGeneratedTemoignages(response, lastScenario.getId());
-
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode jsonNode = mapper.createObjectNode();
-        jsonNode.put("scenario", response);
-
-        return mapper.writeValueAsString(jsonNode);
-        **/
 
         return saveGeneratedTemoignages(response, lastScenario.getId());
     }

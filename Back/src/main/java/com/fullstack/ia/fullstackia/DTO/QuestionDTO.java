@@ -1,4 +1,14 @@
 package com.fullstack.ia.fullstackia.DTO;
 
-public record QuestionDTO(String variable1){
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class QuestionDTO {
+    private String variable1;
 }

@@ -4,7 +4,6 @@ import com.fullstack.ia.fullstackia.DTO.QuestionDTO;
 import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
 import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
 import com.fullstack.ia.fullstackia.Service.*;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +24,15 @@ public class AIController {
 
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
+
+
         //String scenarioPublique = scenarioService.genererScenario(question);
-        System.out.println(questionDTO.variable1());
-        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.variable1());
-        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.variable1());
-        return scenarioPublique;
+        System.out.println(questionDTO.getVariable1());
+        //ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.getVariable1());
+        //System.out.println("public scenario generated"+scenarioPublique.getBody());
+        //scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.getVariable1());
+        //System.out.println("private scenario generated");
+        return null;
     }
 
     @PostMapping(path = "/genererTemoignages")
