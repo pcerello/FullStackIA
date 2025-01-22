@@ -40,4 +40,9 @@ public class AIController {
         return temoignageService.getTempoignagesByIdScenarioById(scenarioId);
     }
 
+    @GetMapping("/scenario/{scenarioId}")
+    public ResponseEntity<ScenarioDTO> getScenarioById(@PathVariable Long scenarioId) {
+        return scenarioService.getScenarioById(scenarioId);
+    }
+
 }

@@ -53,4 +53,15 @@ public class ScenarioService {
                 .orElseThrow(() -> new IllegalArgumentException("Aucun scénario trouvé dans la base de données."));
     }
 
+    public ResponseEntity<ScenarioDTO> getScenarioById(Long scenarioId) {
+        ScenarioEntity scenarioEntity = scenarioRepository.findById(scenarioId)
+               .orElseThrow(() -> new IllegalArgumentException("Scénario non trouvé pour l'ID : " + scenarioId));
+
+        ScenarioDTO scenarioDTO = new ScenarioDTO(
+                scenarioEntity.getId(),
+                scenarioEntity.getDescription()
+        );
+
+        return ResponseEntity.ok(scenarioDTO);
+    }
 }
