@@ -20,7 +20,7 @@ public class ScenarioPriveService {
 
         String prompt = "Ceci est le scenario publique que tu m'a généré juste avant et qui sera exposé à l'utilisateur : \n" + scenarioPublique + 
                 "\n Ce scénario publique possède des suspects. Parmis ces suspects il y a un meurtrier \n" +
-                "Je veux que tu me dise quel est ce meurtrier. Ce dernier (le meurtrier) ne sera dévoilé à l'utilisateur qu'à la fin de son enquete";
+                "Je veux que tu me dise qui est ce meurtrier. Ce dernier (le meurtrier) ne sera dévoilé à l'utilisateur qu'à la fin de son enquete";
         
         String meurtrier = aIService.appelOllama(question,prompt);
         

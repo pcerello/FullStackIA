@@ -9,6 +9,7 @@ import com.fullstack.ia.fullstackia.Entity.TemoignageEntity;
 import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import com.fullstack.ia.fullstackia.Repository.TemoignageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,59 +25,63 @@ public class TemoignageService {
     private final AIService aiService;
     private final ScenarioService scenarioService;
 
-    public String genererTemoignages(String question) throws JsonProcessingException {
-        try {
-            // récupérer le dernier scénario en base
-            ScenarioEntity lastScenario = scenarioService.getLastInsertedScenario();
+    public ResponseEntity<TemoignageDTO> genererTemoignages(String question) {
 
-            if (lastScenario == null) {
-                return "Aucun scénario";
-            }
+        // récupérer le dernier scénario en base
+        ScenarioEntity lastScenario = scenarioService.getLastInsertedScenario();
 
-            // génèrer le prompt en se basant sur le dernier scnario inséré en bdd
-            String prompt = "Voici le scénario : \n" + lastScenario.getDescription() + "\n" +
-                    "Générez un témoignage pour chaque suspect, chaque témoignage incluant une preuve associée." +
-                    "Tu ne dois pas dépasser les 200 caractères";
+        // génèrer le prompt en se basant sur le dernier scnario inséré en bdd
+        String prompt = "Voici le scénario : \n" + lastScenario.getDescription() + "\n" +
+                "Générez un témoignage pour chaque suspect, chaque témoignage incluant une preuve associée." +
+                "Tu ne dois pas dépasser les 200 caractères";
 
-            String response =aiService.appelOllama(question,prompt);
-            saveGeneratedTemoignages(response, lastScenario.getId());
+        String response =aiService.appelOllama(question,prompt);
 
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode jsonNode = mapper.createObjectNode();
-            jsonNode.put("scenario", response);
+        /**
+        saveGeneratedTemoignages(response, lastScenario.getId());
 
-            return mapper.writeValueAsString(jsonNode);
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode jsonNode = mapper.createObjectNode();
+        jsonNode.put("scenario", response);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Erreur : " + e.getMessage();
-        }
+        return mapper.writeValueAsString(jsonNode);
+        **/
+
+        return saveGeneratedTemoignages(response, lastScenario.getId());
     }
 
-    public void saveGeneratedTemoignages(String description, Long scenarioId){
+    public ResponseEntity<TemoignageDTO> saveGeneratedTemoignages(String description, Long scenarioId){
         TemoignageEntity temoignageEntity =  TemoignageEntity.builder()
                 .description(description)
                 .scenario(scenarioRepository.findById(scenarioId).orElseThrow(() -> new IllegalArgumentException("Scenario non trouvé pour l'ID : " + scenarioId)))
                 .build();
-        temoignageRepository.save(temoignageEntity);
+        TemoignageEntity savedTemoignage = temoignageRepository.save(temoignageEntity);
+
+        TemoignageDTO temoignageDTO = new TemoignageDTO(
+                savedTemoignage.getId(),
+                savedTemoignage.getDescription()
+        );
+
+        return ResponseEntity.ok(temoignageDTO);
     }
 
     public List<TemoignageEntity> getTemoignagesByScenarioId(Long scenarioId) {
         return temoignageRepository.findByScenarioId(scenarioId);
     }
 
-    public List<TemoignageDTO> getTempoignagesByIdScenarioById(Long scenarioId) {
+    public ResponseEntity<List<TemoignageDTO>> getTempoignagesByIdScenarioById(Long scenarioId) {
         // Récupérer les entités Temoignage depuis la base de données pour un scénario donné
         List<TemoignageEntity> temoignageEntities = temoignageRepository.findByScenarioId(scenarioId);
 
         // Convertir les entités en DTO
-        return temoignageEntities.stream()
+        List<TemoignageDTO> temoignageDTOS = temoignageEntities.stream()
                 .map(temoignage -> new TemoignageDTO(
                         temoignage.getId(),
                         temoignage.getDescription()
 
                 ))
                 .collect(Collectors.toList());
+        return ResponseEntity.ok(temoignageDTOS);
     }
 
 
