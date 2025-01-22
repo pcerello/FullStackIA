@@ -12,7 +12,6 @@
   .Top,
   .Bottom {
     width: 100%;
-    height: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -89,9 +88,109 @@
       height: 100%;
       width: 50%;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       flex-direction: column;
+
+      .examination {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 75%;
+
+        input {
+          width: 100%;
+          height: 50px;
+          margin: 10px;
+          padding: 10px;
+          border-radius: 5px;
+          background-color: #2D2D2D;
+          color: white;
+          font-size: 1.2em;
+          border: none;
+          transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
+        
+          &::placeholder {
+            color: #94A3B8;
+          }
+        
+          &:hover {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
+            transform: scale(1.02); /* Légère augmentation de taille */
+          }
+        
+          &:focus {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
+            outline: none; /* Retire la bordure par défaut */
+            transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
+          }
+        }
+        
+
+        button {
+          padding: 15px;
+          border: none;
+          background-color: #0779CE; 
+          color: white;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+          box-sizing: border-box;
+          transition: background-color 0.3s ease;
+  
+          &:hover {
+              background-color: #055C8B; // Couleur bleue pour le bouton
+            }
+        }
+
+
+
+      }
+
+      .TestimonialsList {
+        button {
+          position: relative;
+          background-color: white;
+          color: black;
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          cursor: pointer;
+          overflow: hidden;
+          font-size: 16px;
+          z-index: 0; 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0; /* La barre commence vide */
+          height: 100%;
+          background-color: #0779CE; /* Couleur de la barre */
+          z-index: -1; /* Place l'effet derrière le contenu du bouton */
+          transition: width 0.4s ease; /* Animation fluide */
+        }
+        
+        button:hover::before {
+          width: 100%; /* La barre se remplit entièrement */
+        }
+        
+        button span {
+          position: relative;
+          z-index: 1; /* Assure que le texte reste visible */
+        }
+        
+        
+        
+      }
     }
 
     .Accusation {
@@ -101,12 +200,90 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      position: relative;
 
       img {
         width: 10%;
         height: 10%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        z-index: 0;
+    
       }
+
+      h2 {
+        z-index: 1;
+      }
+
+      .accusationForm {
+        z-index:  1;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 50%;
+
+        input {
+          width: 100%;
+          height: 50px;
+          margin: 10px;
+          padding: 10px;
+          border-radius: 5px;
+          background-color: #2D2D2D;
+          color: white;
+          font-size: 1.2em;
+          border: none;
+          transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
+        
+          &::placeholder {
+            color: #94A3B8;
+          }
+        
+          &:hover {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
+            transform: scale(1.02); /* Légère augmentation de taille */
+          }
+        
+          &:focus {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
+            outline: none; /* Retire la bordure par défaut */
+            transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
+          }
+        }
+        
+
+        button {
+          padding: 15px;
+          border: none;
+          background-color: #0779CE; 
+          color: white;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+          box-sizing: border-box;
+          transition: background-color 0.3s ease;
+  
+          &:hover {
+              background-color: #055C8B; // Couleur bleue pour le bouton
+            }
+        }
+      }
+
+
     }
+  }
+
+  .Top {
+    height: 70%;
+  }
+
+  .Bottom {
+    height: 30%;
   }
 
   //   .Description {
