@@ -25,14 +25,13 @@ public class AIController {
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
 
-
         //String scenarioPublique = scenarioService.genererScenario(question);
         System.out.println(questionDTO.getVariable1());
-        //ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.getVariable1());
-        //System.out.println("public scenario generated"+scenarioPublique.getBody());
-        //scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.getVariable1());
-        //System.out.println("private scenario generated");
-        return null;
+        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.getVariable1());
+        System.out.println("public scenario generated"+scenarioPublique.getBody());
+        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.getVariable1());
+        System.out.println("private scenario generated");
+        return scenarioPublique;
     }
 
     @PostMapping(path = "/genererTemoignages")
