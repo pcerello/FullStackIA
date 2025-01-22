@@ -5,6 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import accusationImage from "../../assets/accusation.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
 function Game() {
 
@@ -57,12 +59,15 @@ function Game() {
           </div>
         </div>
         <div className="Testimonials">
+          <h2>Section interrogatoire</h2>
           <form className="examination">
             <input type="text" placeholder="Qui voulez-vous interroger ?" />
             <button type="submit">Interroger</button>
           </form>
           <div className="TestimonialsList">
-            <button>Témoignages</button>
+            <button>
+            <FontAwesomeIcon icon={faClockRotateLeft} />
+              Témoignages</button>
           </div>
         </div>
       </div>
@@ -71,7 +76,7 @@ function Game() {
         <div className="Accusation">
           <img src={accusationImage} alt="accusation" className="accusation-image" />
           <h2>Section accusation </h2>
-          <form className="accusation"  onSubmit={handleSubmit}>
+          <form className="accusationForm"  onSubmit={handleSubmit}>
             <input type="text" value={coupable}
               onChange={handleThemeChange} placeholder="Qui est le coupable ?" />
             <button type="submit">Accuser</button>
