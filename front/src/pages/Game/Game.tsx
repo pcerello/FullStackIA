@@ -12,20 +12,33 @@ import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 function Game() {
 
   const navigate = useNavigate();
+  const [temoin, setTemoin] = useState("");
   const [coupable, setCoupable] = useState("");
   const location = useLocation();
   const data = location.state;
 
-  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTemoinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTemoin(event.target.value);
+  };
+
+  const handleCoupableChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCoupable(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleTemoinSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // Logic to start the game with the entered theme
-    console.log("Thème de l'enquête :", coupable);
+    console.log("Appel au temoi :", temoin);
     // Redirect to the game page using React Router's navigate
-    navigate("/endgame");
+    // navigate("/endgame");
+  };
+
+  const handleCoupableSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Logic to start the game with the entered theme
+    console.log("Le coupable est :", coupable);
+    // Redirect to the game page using React Router's navigate
+    // navigate("/endgame");
   };
 
   return (
@@ -47,8 +60,11 @@ function Game() {
         </div>
         <div className="Testimonials">
           <h2>Section interrogatoire</h2>
-          <form className="examination">
-            <input type="text" placeholder="Qui voulez-vous interroger ?" />
+          <form className="examination" onSubmit={handleTemoinSubmit}>
+            <input  type="text" 
+                    placeholder="Qui voulez-vous interroger ?"
+                    value={temoin}
+                    onChange={handleTemoinChange} />
             <button type="submit">Interroger</button>
           </form>
           <div className="TestimonialsList">
@@ -63,9 +79,11 @@ function Game() {
         <div className="Accusation">
           <img src={accusationImage} alt="accusation" className="accusation-image" />
           <h2>Section accusation </h2>
-          <form className="accusationForm"  onSubmit={handleSubmit}>
-            <input type="text" value={coupable}
-              onChange={handleThemeChange} placeholder="Qui est le coupable ?" />
+          <form className="accusationForm"  onSubmit={handleCoupableSubmit}>
+            <input type="text" 
+                   value={coupable}
+                   onChange={handleCoupableChange}
+                   placeholder="Qui est le coupable ?" />
             <button type="submit">Accuser</button>
           </form>
         </div>

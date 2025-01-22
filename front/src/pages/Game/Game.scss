@@ -37,6 +37,8 @@
           overflow: hidden;
         .texte {
           overflow-y: scroll;
+          white-space: pre-wrap;
+          text-align: justify;
           height: 100%;
           margin: 0;
           padding: 10px;
