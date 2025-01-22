@@ -1,15 +1,11 @@
 package com.fullstack.ia.fullstackia.Controller;
-import com.fullstack.ia.fullstackia.DTO.EvaluationDTO;
-import com.fullstack.ia.fullstackia.DTO.QuestionDTO;
-import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
-import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
+import com.fullstack.ia.fullstackia.DTO.*;
 import com.fullstack.ia.fullstackia.Service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping()
@@ -24,13 +20,12 @@ public class AIController {
 
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
-
         //String scenarioPublique = scenarioService.genererScenario(question);
-        System.out.println(questionDTO.getVariable1());
-        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.getVariable1());
-        System.out.println("public scenario generated"+scenarioPublique.getBody());
-        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.getVariable1());
-        System.out.println("private scenario generated");
+        //System.out.println(questionDTO.question());
+        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.question());
+        //System.out.println("public scenario generated"+scenarioPublique.getBody());
+        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),""); //je met la quetion à vide pour le scénario caché car cette question est déjà fournie pour la génération du scénario publique
+        //System.out.println("private scenario generated");
         return scenarioPublique;
     }
 
