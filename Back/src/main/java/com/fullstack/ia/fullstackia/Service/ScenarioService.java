@@ -22,7 +22,6 @@ public class ScenarioService {
         String response = aiService.appelOllama(question,prompt);
         saveGeneratedScenario(response);
 
-
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode jsonNode = mapper.createObjectNode();
         jsonNode.put("scenario", response);

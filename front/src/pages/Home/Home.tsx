@@ -2,28 +2,35 @@ import React, { useState } from "react";
 import "./Home.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import ApiService from "../../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import enqueteImage from "../../assets/enquete.png";
 
 function Home() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTheme(event.target.value);
   };
 
+  async function fetchData(question: String) {
+    try {
+        setIsLoading(true);
+        const data = await ApiService.post("genererScenario", question);
+        console.log(data);
+        navigate("/game", { state: data });
+    } catch (error) {
+        console.error("Erreur lors de l'appel API :", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Logic to start the game with the entered theme
-    console.log("Thème de l'enquête :", theme);
-
-    // Appeler le serveur pour recuperer le scenario
-    // Mettre un loader
-    // Attendre le retour du Json du serveur
-    // Rediriger sur la page GAME en Post avec le json
-    navigate("/game");
-
+    fetchData(theme);
   };
 
   return (
@@ -39,8 +46,15 @@ function Home() {
               value={theme}
               onChange={handleThemeChange}
               placeholder="Ex: Meurtre mystérieux"
-            />
-            <button type="submit">Lancer la partie</button>
+              disabled={isLoading} // Désactiver l'input pendant le chargement
+              />
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <span className="loader">Attendez... longtemps... très longtemps...</span>
+                ) : (
+                  "Lancer la partie"
+                )}
+              </button>
           </form>
         </div>
       </div>

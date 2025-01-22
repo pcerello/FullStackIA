@@ -65,5 +65,36 @@
             background-color: #055C8B; // Couleur bleue pour le bouton
           }
       }
+      
+      button:disabled {
+        background-color: #aaa;
+        cursor: default;
+      }
+      
+      .loader {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .loader::before {
+        content: "";
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid white;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
   }
 }

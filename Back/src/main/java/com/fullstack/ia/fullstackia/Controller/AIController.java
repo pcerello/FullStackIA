@@ -20,9 +20,11 @@ public class AIController {
     private final FileReadingService fileReadingService;
 
     @PostMapping("/genererScenario")
-    public String genererScenario(@RequestParam String question) throws JsonProcessingException {
+    public String genererScenario(@RequestBody String question) throws JsonProcessingException {
+        System.out.println("console.log -> " + question);
         String scenarioPublique = scenarioService.genererScenario(question);
         scenarioPriveService.genererScenarioPrive(scenarioPublique,"");// je met la question à vide car on l'a déjà fourni la question à Ollama pour générer le scénario publique, on en a pas besoin pour le scénario privé
+//        return scenarioPublique;
         return scenarioPublique;
     }
 
