@@ -1,10 +1,6 @@
 package com.fullstack.ia.fullstackia.Controller;
-import com.fullstack.ia.fullstackia.DTO.EvaluationDTO;
-import com.fullstack.ia.fullstackia.DTO.QuestionDTO;
-import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
-import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
+import com.fullstack.ia.fullstackia.DTO.*;
 import com.fullstack.ia.fullstackia.Service.*;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +17,20 @@ public class AIController {
     private final ScenarioService scenarioService;
     private final ScenarioPriveService scenarioPriveService;
     private final EvaluationService evaluationService;
-    private final FileReadingService fileReadingService;
+
+    @PostMapping("/test")
+    public QuestionDTOClass test(@RequestBody QuestionDTOClass questionDTO) {
+        System.out.println("je suis la");
+        System.out.println("test de : " + questionDTO);
+        return questionDTO;
+    }
 
     @PostMapping("/genererScenario")
     public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
-        //String scenarioPublique = scenarioService.genererScenario(question);
-        System.out.println(questionDTO.variable1());
-        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.variable1());
-        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.variable1());
+        System.out.println("questionDTO : " + questionDTO);
+        System.out.println("questionDTO.question() : " + questionDTO.question());
+        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.question());
+        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),questionDTO.question());
         return scenarioPublique;
     }
 
