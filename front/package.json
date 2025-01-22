@@ -5,6 +5,8 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "cra-template-typescript": "1.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -39,6 +41,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
     "@types/react-router-dom": "^5.3.3",
     "@types/testing-library__jest-dom": "^6.0.0"
   }

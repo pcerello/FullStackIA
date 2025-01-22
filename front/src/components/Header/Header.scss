@@ -4,8 +4,23 @@
     height: 64px;
     font-size: 24px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 32px;
-    gap: 16px;
+    padding: 0px 32px;
+
+
+    .Logo {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        &:hover {
+            cursor: pointer;
+            color: #0779CE;
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+            transition: color 0.3s ease;
+
+        }
+    }
 }
