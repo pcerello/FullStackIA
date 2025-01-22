@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Home.scss";
-import Header from "../../components/Header/Header.tsx";
-import Footer from "../../components/Footer/Footer.tsx";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import enqueteImage from "../../assets/enquete.png";
 
 function Home() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Home() {
     <div className="Home">
       <Header />
       <div className="Body-home">
-        
+        <img src={enqueteImage} alt="enquete" className="enquete-image" />
         <div className="form-overlay">
           <h2>Saisissez le thème de votre enquête</h2>
           <form onSubmit={handleSubmit}>
