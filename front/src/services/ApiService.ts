@@ -16,12 +16,13 @@ class ApiService {
     }
 
     async post(endpoint: string, data: any): Promise<any> {
+        console.log(JSON.stringify(data))
         const response = await fetch(`${this.baseURL}/${endpoint}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({ question: data }),
         });
         if (!response.ok) {
             throw new Error(`Erreur ${response.status}: ${response.statusText}`);

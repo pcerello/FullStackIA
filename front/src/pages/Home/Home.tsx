@@ -20,7 +20,7 @@ function Home() {
         setIsLoading(true);
         const data = await ApiService.post("genererScenario", question);
         console.log(data);
-        navigate("/game", { state: data });
+        navigate("/game/" + data.id );
     } catch (error) {
         console.error("Erreur lors de l'appel API :", error);
     } finally {

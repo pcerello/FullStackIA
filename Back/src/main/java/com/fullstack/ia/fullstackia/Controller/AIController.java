@@ -37,6 +37,7 @@ public class AIController {
 
     @GetMapping("/temoignages/{scenarioId}")
     public ResponseEntity<List<TemoignageDTO>> getTemoignagesByScenario(@PathVariable Long scenarioId) {
+        System.out.println(temoignageService.getTempoignagesByIdScenarioById(scenarioId));
         return temoignageService.getTempoignagesByIdScenarioById(scenarioId);
     }
 

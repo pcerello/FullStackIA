@@ -4,9 +4,9 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ApiService from "../../services/ApiService";
 import accusationImage from "../../assets/accusation.png";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,6 +17,9 @@ function Game() {
   const [coupable, setCoupable] = useState("");
   const [isModal, setIsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [scenario, setScenario] = useState("");
+  const [temoignages, setTemoignages] = useState("");
+  const { id } = useParams();
   const location = useLocation();
   const data = location.state;
 
@@ -27,6 +30,26 @@ function Game() {
   const handleCoupableChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCoupable(event.target.value);
   };
+
+  async function fetchInfoScenario() {
+    try {
+      console.log("Fetching Info scenario...");
+      const scenario = await ApiService.get(`scenario/${id}`);
+      setScenario(scenario?.description || "Scénario indisponible.");
+      
+      const temoignages = await ApiService.get(`temoignages/${id}`);
+      // setTemoignages(temoignages?.description || "Témoignages indisponibles.");
+      setTemoignages(temoignages.length || "Témoignages indisponibles.");
+      console.log(temoignages.length);
+    } catch (error) {
+      console.error("Erreur lors de l'appel API :", error);
+      setScenario("Erreur lors de la récupération du scénario.");
+    }
+  }
+  
+  useEffect(() => {
+    fetchInfoScenario();
+  }, [id]);
 
   async function fetchDataTemoin(request: String) {
     try {
@@ -61,7 +84,6 @@ function Game() {
     console.log("Interrogatoire de :", temoin);
     // Redirect to the game page using React Router's navigate
     fetchDataTemoin(temoin);
-    // navigate("/endgame");
   };
 
   const handleCoupableSubmit = (event: React.FormEvent) => {
@@ -70,7 +92,6 @@ function Game() {
     console.log("J'accuse :", coupable);
     // Redirect to the game page using React Router's navigate
     fetchDataCoupable(coupable);
-    // navigate("/endgame");
   };
 
   return (
@@ -84,7 +105,7 @@ function Game() {
 
           <div className="ombrage">
             <p className="texte">
-              {data?.scenario}
+              {scenario || "Chargement du scénario..."}
               <br />
               &nbsp;
             </p>
@@ -100,6 +121,7 @@ function Game() {
             <button type="submit">Interroger</button>
           </form>
           <div className="TestimonialsList">
+            {temoignages || "Chargement du scénario..."}
             <button>
             <FontAwesomeIcon icon={faClockRotateLeft} />
               Témoignages</button>
