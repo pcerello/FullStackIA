@@ -27,74 +27,73 @@
     text-align: center;
 
     h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-        font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #333;
+
+      &::placeholder {
+        color: #888;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      background-color: #0779ce;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #055c8b; // Couleur bleue pour le bouton
       }
 
-
-      input {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 15px;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
-        background-color: #fff;
-        color: #333;
-
-        &::placeholder {
-            color: #888;
-          }
-      }
-
-      button {
-        width: 100%;
-        padding: 15px;
-        border: none;
-        background-color: #0779CE; 
-        color: white;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-            background-color: #055C8B; // Couleur bleue pour le bouton
-          }
-      }
-      
-      button:disabled {
+      &:disabled {
         background-color: #aaa;
         cursor: default;
       }
-      
+
       .loader {
         display: flex;
         align-items: center;
         gap: 8px;
-      }
-      
-      .loader::before {
-        content: "";
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid white;
-        border-top: 2px solid transparent;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 1rem;
+          height: 1rem;
+          border: 2px solid white;
+          border-top: 2px solid transparent;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
         }
-        to {
-          transform: rotate(360deg);
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
       }
+    }
   }
 }

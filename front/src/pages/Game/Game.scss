@@ -32,9 +32,8 @@
         height: 85%;
         position: relative;
 
-        
         color: white;
-          overflow: hidden;
+        overflow: hidden;
         .texte {
           overflow-y: scroll;
           white-space: pre-wrap;
@@ -108,47 +107,43 @@
           margin: 10px;
           padding: 10px;
           border-radius: 5px;
-          background-color: #2D2D2D;
+          background-color: #2d2d2d;
           color: white;
           font-size: 1.2em;
           border: none;
           transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
-        
+
           &::placeholder {
-            color: #94A3B8;
+            color: #94a3b8;
           }
-        
+
           &:hover {
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
             transform: scale(1.02); /* Légère augmentation de taille */
           }
-        
+
           &:focus {
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
             outline: none; /* Retire la bordure par défaut */
             transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
           }
         }
-        
 
         button {
           padding: 15px;
           border: none;
-          background-color: #0779CE; 
+          background-color: #0779ce;
           color: white;
           font-size: 16px;
           border-radius: 5px;
           cursor: pointer;
           box-sizing: border-box;
           transition: background-color 0.3s ease;
-  
+
           &:hover {
-              background-color: #055C8B; // Couleur bleue pour le bouton
-            }
+            background-color: #055c8b; // Couleur bleue pour le bouton
+          }
         }
-
-
-
       }
 
       .TestimonialsList {
@@ -162,34 +157,35 @@
           cursor: pointer;
           overflow: hidden;
           font-size: 16px;
-          z-index: 0; 
+          z-index: 0;
           display: flex;
           justify-content: center;
           align-items: center;
           gap: 10px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0; /* La barre commence vide */
+            height: 100%;
+            background-color: #0779ce; /* Couleur de la barre */
+            z-index: -1; /* Place l'effet derrière le contenu du bouton */
+            transition: width 0.4s ease; /* Animation fluide */
+          }
+
+
+          &:hover::before {
+            width: 100%; /* La barre se remplit entièrement */
+          }
+
+          & span {
+            position: relative;
+            z-index: 1; /* Assure que le texte reste visible */
+          }
         }
-        
-        button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0; /* La barre commence vide */
-          height: 100%;
-          background-color: #0779CE; /* Couleur de la barre */
-          z-index: -1; /* Place l'effet derrière le contenu du bouton */
-          transition: width 0.4s ease; /* Animation fluide */
-        }
-        
-        button:hover::before {
-          width: 100%; /* La barre se remplit entièrement */
-        }
-        
-        button span {
-          position: relative;
-          z-index: 1; /* Assure que le texte reste visible */
-        }
-        
+
       }
     }
 
@@ -212,7 +208,6 @@
         height: 100%;
         object-fit: contain;
         z-index: 0;
-    
       }
 
       h2 {
@@ -220,7 +215,7 @@
       }
 
       .accusationForm {
-        z-index:  1;
+        z-index: 1;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -234,79 +229,75 @@
           margin: 10px;
           padding: 10px;
           border-radius: 5px;
-          background-color: #2D2D2D;
+          background-color: #2d2d2d;
           color: white;
           font-size: 1.2em;
           border: none;
           transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
-        
+
           &::placeholder {
-            color: #94A3B8;
+            color: #94a3b8;
           }
-        
+
           &:hover {
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
             transform: scale(1.02); /* Légère augmentation de taille */
           }
-        
+
           &:focus {
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
             outline: none; /* Retire la bordure par défaut */
             transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
           }
         }
-        
 
         button {
           padding: 15px;
           border: none;
-          background-color: #0779CE; 
+          background-color: #0779ce;
           color: white;
           font-size: 16px;
           border-radius: 5px;
           cursor: pointer;
           box-sizing: border-box;
           transition: background-color 0.3s ease;
-  
+
           &:hover {
-              background-color: #055C8B; // Couleur bleue pour le bouton
+            background-color: #055c8b; // Couleur bleue pour le bouton
+          }
+
+          &:disabled {
+            background-color: #aaa;
+            cursor: default;
+          }
+
+          .loader {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            &::before {
+              content: "";
+              display: inline-block;
+              width: 1rem;
+              height: 1rem;
+              border: 2px solid white;
+              border-top: 2px solid transparent;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
             }
-        }
-     
-        button:disabled {
-          background-color: #aaa;
-          cursor: default;
-        }
-        
-        .loader {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
 
-        .loader::before {
-          content: "";
-          display: inline-block;
-          width: 1rem;
-          height: 1rem;
-          border: 2px solid white;
-          border-top: 2px solid transparent;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
+            @keyframes spin {
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            }
           }
         }
-        
       }
-
-
     }
   }
 
@@ -317,92 +308,4 @@
   .Bottom {
     height: 30%;
   }
-
-  //   .Description {
-  //     width: calc(100% - 64px);
-  //     height: 25%;
-  //     display: flex;
-  //     flex-direction: column;
-  //     padding: 32px 32px 16px 32px;
-  //     gap: 10px;
-
-  //     h1 {
-  //       margin: 0;
-  //       height: 25%;
-  //     }
-
-  //     .ombrage {
-  //       position: relative;
-  //       height: 75%;
-  //       color: white;
-  //         overflow: hidden;
-
-  //       .texte {
-  //         overflow-y: scroll;
-  //         height: 100%;
-  //         margin: 0;
-  //         padding: 10px;
-  //         // espacement entre les lignes
-  //         line-height: 1.5;
-
-  //         // scrollbar
-  //         &::-webkit-scrollbar {
-  //           width: 10px;
-  //         }
-
-  //         &::-webkit-scrollbar-track {
-  //           background: #f1f1f1;
-  //           border-radius: 5px;
-  //         }
-
-  //         &::-webkit-scrollbar-thumb {
-  //           background: #888;
-  //           border-radius: 5px;
-  //         }
-
-  //         &::-webkit-scrollbar-thumb:hover {
-  //           background: #555;
-  //         }
-  //       }
-
-  //       // Fondu
-  //       &:before,
-  //       &:after {
-  //         content: "";
-  //         position: absolute;
-  //         left: 0;
-  //         right: 0;
-  //         height: 30px; // ajuster la hauteur du fondu
-  //         pointer-events: none;
-  //         z-index: 1;
-  //       }
-
-  //       &:before {
-  //         top: 0;
-  //         background: linear-gradient(to bottom, #161616, transparent);
-  //       }
-
-  //       &:after {
-  //         bottom: 0;
-  //         background: linear-gradient(to top, #161616, transparent);
-  //       }
-  //     }
-  //   }
-
-  //   .Testimonials {
-  //     height: 25%;
-  //     width: calc(100% - 64px);
-  //     padding: 16px 32px 16px 32px;
-  //   }
-
-  //   .Accusation {
-  //     height: 50%;
-  //     width: calc(100% - 64px);
-  //     padding: 16px 32px 32px 32px;
-
-  //     img {
-  //       width: 10%;
-  //       height: 10%;
-  //     }
-  //   }
 }
