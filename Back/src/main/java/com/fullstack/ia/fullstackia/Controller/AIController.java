@@ -1,6 +1,5 @@
 package com.fullstack.ia.fullstackia.Controller;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fullstack.ia.fullstackia.DTO.TemoignageDTO;
+import com.fullstack.ia.fullstackia.DTO.*;
 import com.fullstack.ia.fullstackia.Service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,27 +19,30 @@ public class AIController {
     private final FileReadingService fileReadingService;
 
     @PostMapping("/genererScenario")
-    public String genererScenario(@RequestBody String question) throws JsonProcessingException {
-        System.out.println("console.log -> " + question);
-        String scenarioPublique = scenarioService.genererScenario(question);
-        scenarioPriveService.genererScenarioPrive(scenarioPublique,"");// je met la question à vide car on l'a déjà fourni la question à Ollama pour générer le scénario publique, on en a pas besoin pour le scénario privé
+    public ResponseEntity<ScenarioDTO> genererScenario(@RequestBody QuestionDTO questionDTO) {
+        ResponseEntity<ScenarioDTO> scenarioPublique = scenarioService.genererScenario(questionDTO.question());
+        scenarioPriveService.genererScenarioPrive(String.valueOf(scenarioPublique.getBody()),""); //je met la quetion à vide pour le scénario caché car cette question est déjà fournie pour la génération du scénario publique
         return scenarioPublique;
     }
 
     @PostMapping(path = "/genererTemoignages")
-    public String genererTemoignagesPourScenario(@RequestBody String question) throws JsonProcessingException{
-        return temoignageService.genererTemoignages(question);
+    public ResponseEntity<TemoignageDTO> genererTemoignagesPourScenario(@RequestBody QuestionDTO questionDTO){
+        return temoignageService.genererTemoignages(questionDTO.question());
     }
 
     @PostMapping(path = "/evaluationReponseUtilisateur")
-    public String evaluationReponseUtilisateur(@RequestBody String userResponse) {
-        return evaluationService.evaluerReponse(userResponse);
+    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse) {
+        return evaluationService.evaluerReponse(userResponse.question());
     }
 
     @GetMapping("/temoignages/{scenarioId}")
     public ResponseEntity<List<TemoignageDTO>> getTemoignagesByScenario(@PathVariable Long scenarioId) {
-        List<TemoignageDTO> temoignages = temoignageService.getTempoignagesByIdScenarioById(scenarioId);
-        return ResponseEntity.ok(temoignages);
+        return temoignageService.getTempoignagesByIdScenarioById(scenarioId);
+    }
+
+    @GetMapping("/scenario/{scenarioId}")
+    public ResponseEntity<ScenarioDTO> getScenarioById(@PathVariable Long scenarioId) {
+        return scenarioService.getScenarioById(scenarioId);
     }
 
 }

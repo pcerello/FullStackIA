@@ -1,11 +1,10 @@
 package com.fullstack.ia.fullstackia.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -17,26 +16,36 @@ public class ScenarioService {
     private final AIService aiService;
     private final FileReadingService fileReadingService;
 
-    public String genererScenario(String question) throws JsonProcessingException {
+    public ResponseEntity<ScenarioDTO> genererScenario(String question) {
         String prompt = fileReadingService.readInternalFileAsString("prompts/simple_prompt.txt");
         String response = aiService.appelOllama(question,prompt);
-        saveGeneratedScenario(response);
-
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode jsonNode = mapper.createObjectNode();
-        jsonNode.put("scenario", response);
-
-        return mapper.writeValueAsString(jsonNode);
+        /**
+         * saveGeneratedScenario(response);
+         * ObjectMapper mapper = new ObjectMapper();
+         * ObjectNode jsonNode = mapper.createObjectNode();
+         * jsonNode.put("scenario", response);
+         * return mapper.writeValueAsString(jsonNode);
+         * **/
+        return saveGeneratedScenario(response);
 
     }
 
-    public void saveGeneratedScenario(String scenarioDescription) {
+    public ResponseEntity<ScenarioDTO> saveGeneratedScenario(String scenarioDescription) {
     // Créer une nouvelle entité et la sauvegarder
     ScenarioEntity scenarioEntity = ScenarioEntity.builder()
             .description(scenarioDescription)
             .build();
 
-        scenarioRepository.save(scenarioEntity);
+        ScenarioEntity savedScenario = scenarioRepository.save(scenarioEntity);
+
+        // Convertir l'entité sauvegardée en DTO
+        ScenarioDTO scenarioDTO = new ScenarioDTO(
+                savedScenario.getId(),
+                savedScenario.getDescription()
+        );
+
+        // retourner une réponse avec le DTO
+        return ResponseEntity.ok(scenarioDTO);
     }
 
     public ScenarioEntity getLastInsertedScenario() {
@@ -44,4 +53,15 @@ public class ScenarioService {
                 .orElseThrow(() -> new IllegalArgumentException("Aucun scénario trouvé dans la base de données."));
     }
 
+    public ResponseEntity<ScenarioDTO> getScenarioById(Long scenarioId) {
+        ScenarioEntity scenarioEntity = scenarioRepository.findById(scenarioId)
+               .orElseThrow(() -> new IllegalArgumentException("Scénario non trouvé pour l'ID : " + scenarioId));
+
+        ScenarioDTO scenarioDTO = new ScenarioDTO(
+                scenarioEntity.getId(),
+                scenarioEntity.getDescription()
+        );
+
+        return ResponseEntity.ok(scenarioDTO);
+    }
 }
