@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -10,6 +10,24 @@ function Home() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState("");
+
+  async function fetchHistory() {
+    try {
+      console.log("Fetching Historique...");
+      const history = await ApiService.get('historiqueScenarios');
+      // setTemoignages(temoignages?.description || "Témoignages indisponibles.");
+      setHistory(history.length || "Pas d'historique d'indisponibles.");
+      console.log(history.length);
+    } catch (error) {
+      console.error("Erreur lors de l'appel API :", error);
+      setHistory("Erreur lors de la récupération du scénario.");
+    }
+  }
+  
+  useEffect(() => {
+    fetchHistory();
+  }, []);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTheme(event.target.value);
