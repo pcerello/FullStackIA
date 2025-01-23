@@ -35,7 +35,7 @@ public class AIController {
     }
 
     // récupèrer tous les témoignages liés à un scenario
-    @GetMapping("/temoignages/{scenarioId}")
+    @GetMapping("/scenario/{scenarioId}/ListeTemoignages")
     public ResponseEntity<List<TemoignageDTO>> getTemoignagesByScenario(@PathVariable Long scenarioId) {
         return temoignageService.getTempoignagesByIdScenario(scenarioId);
     }
@@ -52,8 +52,8 @@ public class AIController {
         return scenarioService.getLastInsertedScenarios();
     }
 
-    // récupérer l'evaluation lié à un scenario
-    @GetMapping("/evaluation/{scenarioId}")
+    // récupérer l'evaluation liée à un scenario
+    @GetMapping("/scenario/{scenarioId}/evaluation")
     public ResponseEntity<EvaluationDTO> getEvaluationByScenario(@PathVariable Long scenarioId) {
         return evaluationService.getEvaluationByIdScenario(scenarioId);
     }
