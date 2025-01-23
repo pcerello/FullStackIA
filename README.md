@@ -24,7 +24,7 @@ Installation du jeu :
     Dans la configuration du runner Java spécifier:
     Environement variables : password=mot_de_passe_de_votre_DB
 
-- Lancer dans une console : <ollaman run llama3.2:1b>
+- Lancer dans une console : <ollama run llama3.2>
 
 - Lancer le projet Java sur le dossier "Back"
 
