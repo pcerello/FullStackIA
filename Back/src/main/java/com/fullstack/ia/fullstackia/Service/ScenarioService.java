@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -19,13 +22,7 @@ public class ScenarioService {
     public ResponseEntity<ScenarioDTO> genererScenario(String question) {
         String prompt = fileReadingService.readInternalFileAsString("prompts/simple_prompt.txt");
         String response = aiService.appelOllama(question,prompt);
-        /**
-         * saveGeneratedScenario(response);
-         * ObjectMapper mapper = new ObjectMapper();
-         * ObjectNode jsonNode = mapper.createObjectNode();
-         * jsonNode.put("scenario", response);
-         * return mapper.writeValueAsString(jsonNode);
-         * **/
+
         return saveGeneratedScenario(response);
 
     }
@@ -63,5 +60,19 @@ public class ScenarioService {
         );
 
         return ResponseEntity.ok(scenarioDTO);
+    }
+
+    public ResponseEntity<List<ScenarioDTO>> getLastInsertedScenarios() {
+        // je veux récupérer les derniers scenarios insérés en base de donnée avec une limite de 5
+        List<ScenarioEntity> lastScenarios = scenarioRepository.findTop5ByOrderByIdDesc();
+
+        List<ScenarioDTO> scenarioDTOs = lastScenarios.stream()
+               .map(scenario -> new ScenarioDTO(
+                        scenario.getId(),
+                        scenario.getDescription()
+                ))
+               .collect(Collectors.toList());
+
+        return ResponseEntity.ok(scenarioDTOs);
     }
 }
