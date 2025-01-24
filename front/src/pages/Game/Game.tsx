@@ -49,7 +49,7 @@ function Game() {
   async function fetchTemoignages() {
     try {
       console.log("Fetching Temoignages...");
-      const temoignages = await ApiService.get(`temoignages/${id}`);
+      const temoignages = await ApiService.get(`scenario/${id}/ListeTemoignages`);
       setTemoignages(temoignages);
       console.log(temoignages);
 
