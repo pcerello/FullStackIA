@@ -12,7 +12,7 @@ function Home() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [Historiques, setHistoriques] = useState<{ id: 0, description: "" }[]>([]);
+  const [historiques, setHistoriques] = useState<{ id: 0, description: "" }[]>([]);
   const [isModalHistorique, setIsModalHistorique] = useState(false);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,6 @@ function Home() {
       <div className="Home">
         <Header />
         <div className="Body-home">
-          {/* <img src={enqueteImage} alt="enquete" className="enquete-image" /> */}
           <div className="form-overlay">
             <h2>Saisissez le thème de votre enquête</h2>
             <form onSubmit={handleSubmit}>
@@ -78,19 +77,11 @@ function Home() {
                     "Lancer la partie"
                   )}
                 </button>
+                <button onClick={() => handleListHistoriques()}>
+                    <FontAwesomeIcon icon={faClockRotateLeft} />
+                    Historique
+                </button> 
             </form>
-          </div>
-          <div className="TestimonialsList">
-            {/* {historiques.length > 0? historiques.map((historique) => (
-              <button key={historique.id} onClick={() => setTemoignage(historique)}>
-                Témoignage {historique.id}
-              </button>
-            )) : "Chargement des témoignages..."} */}
-            
-            <button onClick={() => handleListHistoriques()}>
-              <FontAwesomeIcon icon={faClockRotateLeft} />
-              Témoignages
-            </button>
           </div>
         </div>
         <Footer />

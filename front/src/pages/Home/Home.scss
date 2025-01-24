@@ -51,6 +51,10 @@
       }
     }
 
+    button:first-of-type {
+      margin-bottom: 15px;
+    }
+
     button {
       width: 100%;
       padding: 15px;
@@ -71,7 +75,9 @@
         background-color: #aaa;
         cursor: default;
       }
-
+      svg {
+        margin-right: 15px;
+      }
       .loader {
         display: flex;
         align-items: center;

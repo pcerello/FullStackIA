@@ -9,6 +9,7 @@ function Endgame() {
     <div className="Endgame">
       <Header />
       <div className="Body-endgame">
+        
       </div>
       <Footer />
     </div>
