@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Game.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ApiService from "../../services/ApiService";
 import accusationImage from "../../assets/accusation.png";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,8 +18,6 @@ function Game() {
   const [scenario, setScenario] = useState("");
   const [temoignages, setTemoignages] = useState("");
   const { id } = useParams();
-  const location = useLocation();
-  const data = location.state;
 
   const handleTemoinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTemoin(event.target.value);
