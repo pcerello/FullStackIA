@@ -3,7 +3,6 @@ import "./Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
 function Header(props: { buttonAbend?: boolean }) {
   return (
     <div className="Header">
