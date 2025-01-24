@@ -9,7 +9,6 @@ function Endgame() {
     <div className="Endgame">
       <Header />
       <div className="Body-endgame">
-        <img src={enqueteImage} alt="logo" />
       </div>
       <Footer />
     </div>

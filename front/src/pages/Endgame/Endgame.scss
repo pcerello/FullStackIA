@@ -1,0 +1,13 @@
+.Body-endgame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 88px - 64px);
+    background-color: #161616;
+    position: relative;
+    text-align: center;
+    background-image: url("../../assets/enquete.png");
+    background-position: center center;
+    background-size: cover;
+
+}
