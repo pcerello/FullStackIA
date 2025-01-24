@@ -4,10 +4,12 @@ import com.fullstack.ia.fullstackia.DTO.ScenarioDTO;
 import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -51,19 +53,26 @@ public class ScenarioService {
     }
 
     public ResponseEntity<ScenarioDTO> getScenarioById(Long scenarioId) {
-        ScenarioEntity scenarioEntity = scenarioRepository.findById(scenarioId)
-               .orElseThrow(() -> new IllegalArgumentException("Scénario non trouvé pour l'ID : " + scenarioId));
+        Optional<ScenarioEntity> scenarioEntityOptional = scenarioRepository.findById(scenarioId);
 
+        if (scenarioEntityOptional.isEmpty()) {
+            // Retourner un code 404 si le scénario n'existe pas
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        // Si le scénario existe, le convertir en DTO
+        ScenarioEntity scenarioEntity = scenarioEntityOptional.get();
         ScenarioDTO scenarioDTO = new ScenarioDTO(
                 scenarioEntity.getId(),
                 scenarioEntity.getDescription()
         );
 
+        // Retourner le DTO avec un statut 200 OK
         return ResponseEntity.ok(scenarioDTO);
     }
 
     public ResponseEntity<List<ScenarioDTO>> getLastInsertedScenarios() {
-        // je veux récupérer les derniers scenarios insérés en base de donnée avec une limite de 5
+        // on récupére les derniers scenarios insérés en base de donnée avec une limite de 5
         List<ScenarioEntity> lastScenarios = scenarioRepository.findTop5ByOrderByIdDesc();
 
         List<ScenarioDTO> scenarioDTOs = lastScenarios.stream()

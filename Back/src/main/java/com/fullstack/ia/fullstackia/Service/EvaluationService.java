@@ -6,7 +6,9 @@ import com.fullstack.ia.fullstackia.Entity.ScenarioEntity;
 import com.fullstack.ia.fullstackia.Entity.ScenarioPriveEntity;
 import com.fullstack.ia.fullstackia.Entity.TemoignageEntity;
 import com.fullstack.ia.fullstackia.Repository.EvaluationRepository;
+import com.fullstack.ia.fullstackia.Repository.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,6 +22,7 @@ public class EvaluationService {
     private final AIService aIService;
     private final EvaluationRepository evaluationRepository;
     private final ScenarioPriveService scenarioPriveService;
+    private final ScenarioRepository scenarioRepository;
 
     public ResponseEntity<EvaluationDTO> evaluerReponse(String userResponse) {
 
@@ -66,8 +69,19 @@ public class EvaluationService {
     }
 
     public ResponseEntity<EvaluationDTO> getEvaluationByIdScenario(Long scenarioId) {
-        // Récupérer l'évaluation liée au scénario donné
+        // on vérifie si le scenario existe en base de donnée
+        if (!scenarioRepository.existsById(scenarioId)) {
+            // on retourne un code 404 si le scénario n'existe pas
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
         EvaluationEntity evaluationEntity = evaluationRepository.findByScenarioId(scenarioId);
+
+        //on vérifie si on a recup l'evaluation
+        if (evaluationEntity == null) {
+            // on retourner un code 204 No Content s'il y est pas
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
 
         EvaluationDTO evaluationDTO = new EvaluationDTO(
                 evaluationEntity.getId(),
