@@ -1,7 +1,7 @@
 #
 #                    Projet Ynov FullStack
 #                 Application "PisteMortelle"
-#         Enquête poslicière générée par l'IA Ollama
+#         Enquête policière générée par l'IA Ollama
 #
 # Groupe: Pauline Cerello | Rania Masdoua | Maximilien Auclair
 # 
