@@ -23,4 +23,26 @@
 
         }
     }
+
+    .Button-end {
+
+        button {
+            // rouge
+            background-color: #D32F2F;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #FF5252;
+            }
+        }
+
+
+    }
 }
