@@ -29,8 +29,9 @@
       h1 {
         height: 15%;
         display: flex;
-    align-items: center;
+        align-items: center;
       }
+
       .ombrage {
         height: 85%;
         position: relative;
@@ -38,6 +39,7 @@
 
         color: white;
         overflow: hidden;
+
         .texte {
           overflow-y: scroll;
           white-space: pre-wrap;
@@ -120,21 +122,27 @@
           color: white;
           font-size: 1.2em;
           border: none;
-          transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+          /* Ajout de la transition */
 
           &::placeholder {
             color: #94a3b8;
           }
 
           &:hover {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
-            transform: scale(1.02); /* Légère augmentation de taille */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            /* Ombre légère */
+            transform: scale(1.02);
+            /* Légère augmentation de taille */
           }
 
           &:focus {
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
-            outline: none; /* Retire la bordure par défaut */
-            transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+            /* Ombre bleu clair */
+            outline: none;
+            /* Retire la bordure par défaut */
+            transform: scale(1.03);
+            /* Augmentation de taille légèrement plus importante */
           }
         }
 
@@ -177,21 +185,27 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 0; /* La barre commence vide */
+            width: 0;
+            /* La barre commence vide */
             height: 100%;
-            background-color: #0779ce; /* Couleur de la barre */
-            z-index: -1; /* Place l'effet derrière le contenu du bouton */
-            transition: width 0.4s ease; /* Animation fluide */
+            background-color: #0779ce;
+            /* Couleur de la barre */
+            z-index: -1;
+            /* Place l'effet derrière le contenu du bouton */
+            transition: width 0.4s ease;
+            /* Animation fluide */
           }
 
 
           &:hover::before {
-            width: 100%; /* La barre se remplit entièrement */
+            width: 100%;
+            /* La barre se remplit entièrement */
           }
 
           & span {
             position: relative;
-            z-index: 1; /* Assure que le texte reste visible */
+            z-index: 1;
+            /* Assure que le texte reste visible */
           }
         }
 
@@ -242,21 +256,27 @@
           color: white;
           font-size: 1.2em;
           border: none;
-          transition: box-shadow 0.3s ease, transform 0.3s ease; /* Ajout de la transition */
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+          /* Ajout de la transition */
 
           &::placeholder {
             color: #94a3b8;
           }
 
           &:hover {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ombre légère */
-            transform: scale(1.02); /* Légère augmentation de taille */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            /* Ombre légère */
+            transform: scale(1.02);
+            /* Légère augmentation de taille */
           }
 
           &:focus {
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* Ombre bleu clair */
-            outline: none; /* Retire la bordure par défaut */
-            transform: scale(1.03); /* Augmentation de taille légèrement plus importante */
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+            /* Ombre bleu clair */
+            outline: none;
+            /* Retire la bordure par défaut */
+            transform: scale(1.03);
+            /* Augmentation de taille légèrement plus importante */
           }
         }
 
@@ -300,6 +320,7 @@
               from {
                 transform: rotate(0deg);
               }
+
               to {
                 transform: rotate(360deg);
               }

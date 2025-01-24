@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -56,8 +59,18 @@ public class TemoignageService {
     }
 
     public ResponseEntity<List<TemoignageDTO>> getTempoignagesByIdScenario(Long scenarioId) {
-        // Récupérer les entités Temoignage depuis la base de données pour un scénario donné
+        // vérifier s'il y a un scénario avec cet id
+        if (!scenarioRepository.existsById(scenarioId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        // Récupérer les entités Temoignage pour le scénario
         List<TemoignageEntity> temoignageEntities = temoignageRepository.findByScenarioId(scenarioId);
+
+        // Vérifier s'il y a des témoignages
+        if (temoignageEntities.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        };
 
         // Convertir les entités en DTO
         List<TemoignageDTO> temoignageDTOS = temoignageEntities.stream()
