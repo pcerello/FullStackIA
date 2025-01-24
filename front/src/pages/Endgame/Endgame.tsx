@@ -37,7 +37,7 @@ function Endgame() {
               alt="Trophy"
             />
           </div>
-          <p className="end-game__time">Temps : </p>
+          {/* <p className="end-game__time">Temps : </p> */}
           <div className="end-game__description">
             <p>
               { data.description }
