@@ -3,14 +3,12 @@ import "./Modal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-function Modal(props: { open: boolean; content: {id: Number, description: String}[]; title: string; setIsModal: (value: boolean) => void }) {
+function Modal(props: { open: boolean; content: {id: number, description: String}[] | {id: number, description: String}; title: string; setIsModal: (value: boolean) => void }) {
   const closeModal = () => {
     console.log("close modal");
     props.setIsModal(false);
   };
 
-
-  console.log("props.content", props.content);
 
   
   return (
@@ -28,7 +26,14 @@ function Modal(props: { open: boolean; content: {id: Number, description: String
 
               props.content.sort((a, b) => b.id - a.id).map((item) => <><p key={item.id}>
                     
-                    {item.id === props.content.length ? "Dernier témoignage : " : "Témoignage n°" + item.id + " : "}
+
+                    {
+                        
+                    // typer props.content pour éviter l'erreur
+                    (props.content as {id: number, description: String}[]).length === item.id ?  "Dernier témoignage : " : "Témoignage n°" + item.id + " : "
+
+                    }
+                   
                     {item.description}
                     
                     </p>
@@ -37,7 +42,7 @@ function Modal(props: { open: boolean; content: {id: Number, description: String
 
 
               : // sinon, on affiche juste
-                props.content[0].description
+                props.content.description
                 // texte
           }
         </p>

@@ -14,7 +14,7 @@ import Modal from "../../components/Modal/Modal";
 function Game() {
   const navigate = useNavigate();
   const [temoin, setTemoin] = useState("");
-  const [temoignage, setTemoignage] = useState<{ id: 0, description: "" }[]>([]);
+  const [temoignage, setTemoignage] = useState<{ id: 0, description: "" }>({ id: 0, description: "" });
   const [temoignages, setTemoignages] = useState<{ id: 0, description: "" }[]>([]);
   const [coupable, setCoupable] = useState("");
   const [isModalTemoignage, setIsModalTemoignage] = useState(false);
