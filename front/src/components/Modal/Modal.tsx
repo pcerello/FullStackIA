@@ -24,20 +24,20 @@ function Modal(props: { open: boolean; content: {id: number, description: String
              
               // temoignages dans l'ordre décroissant
 
-              props.content.sort((a, b) => b.id - a.id).map((item) => <><p key={item.id}>
+              props.content.sort((a, b) => b.id - a.id).map((item,index) => <><p key={item.id}>
                     
 
                     {
                         
                     // typer props.content pour éviter l'erreur
-                    (props.content as {id: number, description: String}[]).length === item.id ?  "Dernier témoignage : " : "Témoignage n°" + item.id + " : "
+                    0 === index ?  "Dernier témoignage : " : "Témoignage n°" + item.id + " : "
 
                     }
                    
                     {item.description}
                     
                     </p>
-                {item.id === 1 ? "" : <hr />}   </> 
+                {( props.content as {id: number, description: String}[]).length === index +1  ? "" : <hr />}   </> 
                 )
 
 
