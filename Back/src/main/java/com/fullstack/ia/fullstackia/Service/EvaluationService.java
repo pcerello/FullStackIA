@@ -32,9 +32,6 @@ public class EvaluationService {
 
         // récupérer les témoignages liés au dernier scénario
         List<TemoignageEntity> temoignages = temoignageService.getTemoignagesByScenarioId(lastScenario.getId());
-            /*if (temoignages.isEmpty()) {
-                return "Aucun témoignage disponible pour le scénario.";
-            }*/
 
         String prompt = "Voici le contexte de l'enquête :\n" +
                 "Scénario publique dévoilé à l'utilisateur : " + lastScenario.getDescription() + "\n" +
@@ -66,5 +63,18 @@ public class EvaluationService {
         );
 
         return ResponseEntity.ok(evaluationDTO);
+    }
+
+    public ResponseEntity<EvaluationDTO> getEvaluationByIdScenario(Long scenarioId) {
+        // Récupérer l'évaluation liée au scénario donné
+        EvaluationEntity evaluationEntity = evaluationRepository.findByScenarioId(scenarioId);
+
+        EvaluationDTO evaluationDTO = new EvaluationDTO(
+                evaluationEntity.getId(),
+                evaluationEntity.getDescription()
+        );
+
+        return ResponseEntity.ok(evaluationDTO);
+
     }
 }

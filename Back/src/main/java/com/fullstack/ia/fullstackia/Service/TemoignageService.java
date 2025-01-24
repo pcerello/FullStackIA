@@ -55,7 +55,7 @@ public class TemoignageService {
         return temoignageRepository.findByScenarioId(scenarioId);
     }
 
-    public ResponseEntity<List<TemoignageDTO>> getTempoignagesByIdScenarioById(Long scenarioId) {
+    public ResponseEntity<List<TemoignageDTO>> getTempoignagesByIdScenario(Long scenarioId) {
         // Récupérer les entités Temoignage depuis la base de données pour un scénario donné
         List<TemoignageEntity> temoignageEntities = temoignageRepository.findByScenarioId(scenarioId);
 
@@ -69,6 +69,4 @@ public class TemoignageService {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(temoignageDTOS);
     }
-
-
 }

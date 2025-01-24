@@ -3,53 +3,16 @@ import "./Modal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-function Modal(props: { open: boolean; content: string | String[]; title: string; setIsModal: (value: boolean) => void }) {
+function Modal(props: { open: boolean; content: {id: Number, description: String}[]; title: string; setIsModal: (value: boolean) => void }) {
   const closeModal = () => {
     console.log("close modal");
     props.setIsModal(false);
   };
 
-  const texte =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-        consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc \
-    consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc ";
 
-  const temoignages = [
-    {
-      id: 1,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum.",
-    },
-    {
-      id: 2,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum.",
-    },
-    {
-      id: 3,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum.",
-    },
-    {
-      id: 4,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum. Nullam nec purus nec nunc consectetur fermentum.",
-    },
-  ];
+  console.log("props.content", props.content);
+
+  
   return (
     <div className={"Modal" + (props.open ? " open" : "")}>
       <div className="modal-content">
@@ -59,13 +22,13 @@ function Modal(props: { open: boolean; content: string | String[]; title: string
           {
             // si props.content est un tableau, on affiche chaque élément du tableau
             Array.isArray(props.content)
-              ? //props.content.map((item, index) => <p key={index}>{item}</p>)
-
+              ? 
+             
               // temoignages dans l'ordre décroissant
 
-              temoignages.sort((a, b) => b.id - a.id).map((item) => <><p key={item.id}>
+              props.content.sort((a, b) => b.id - a.id).map((item) => <><p key={item.id}>
                     
-                    {item.id === temoignages.length ? "Dernier témoignage : " : "Témoignage n°" + item.id + " : "}
+                    {item.id === props.content.length ? "Dernier témoignage : " : "Témoignage n°" + item.id + " : "}
                     {item.description}
                     
                     </p>
@@ -74,8 +37,8 @@ function Modal(props: { open: boolean; content: string | String[]; title: string
 
 
               : // sinon, on affiche juste
-                //props.content
-                texte
+                props.content[0].description
+                // texte
           }
         </p>
       </div>
