@@ -19,7 +19,7 @@ public class EvaluationEntity {
     @Lob
     private String description;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "scenario_id")
     private ScenarioEntity scenario;
 }
