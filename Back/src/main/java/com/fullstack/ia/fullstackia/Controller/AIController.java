@@ -53,8 +53,8 @@ public class AIController {
     }
 
     // récupérer l'evaluation liée à un scenario
-    @GetMapping("/scenario/{scenarioId}/evaluation")
-    public ResponseEntity<List<EvaluationDTO>> getEvaluationByScenario(@PathVariable Long scenarioId) {
+    @GetMapping("/scenario/{scenarioId}/evaluations")
+    public ResponseEntity<List<EvaluationDTO>> getEvaluationsByScenario(@PathVariable Long scenarioId) {
         return evaluationService.getEvaluationByIdScenario(scenarioId);
     }
 
