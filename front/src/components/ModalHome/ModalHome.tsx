@@ -15,14 +15,14 @@ const ModalHome: React.FC<ModalHomeProps> = ({ isOpen, onClose, data }) => {
 
   const handleClick = (id: number) => {
     navigate(`/game/${id}`);
-    onClose(); // Fermer le modal après navigation
+    onClose();
   };
 
   return (
     <div className="overlay" onClick={onClose}>
       <div
         className="modal"
-        onClick={(e) => e.stopPropagation()} // Empêche la fermeture en cliquant dans la modal
+        onClick={(e) => e.stopPropagation()}
       >
         <button className="close-button" onClick={onClose}>
           &times;
@@ -35,8 +35,8 @@ const ModalHome: React.FC<ModalHomeProps> = ({ isOpen, onClose, data }) => {
               className="clickable-item"
               onClick={() => handleClick(item.id)}
             >
-              <strong>#{item.id}:</strong> {item.description.slice(0, 60)}
-              {item.description.length > 60 && "..."}
+              <span># <strong>{item.id} :</strong></span> <span>{item.description.slice(0, 60)}
+              {item.description.length > 60 && "..."}</span>
             </li>
           ))}
         </ul>

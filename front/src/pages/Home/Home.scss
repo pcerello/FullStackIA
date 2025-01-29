@@ -1,38 +1,37 @@
+@import '../../vars';
+
+.Home{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .Body-home {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 88px - 64px);
-  background-color: #161616;
-  position: relative;
   text-align: center;
-  background-image: url("../../assets/enquete.png");
-  background-position: center center;
-  background-size: cover;
-
-  .enquete-image {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-  }
+  padding: 3rem 1rem;
+  flex-grow: 1;
 
   .form-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6); // Fond semi-transparent
-    padding: 30px;
+    background: rgba($hard_dark_c, 0.85);
+    padding: 2rem;
     border-radius: 10px;
-    color: white;
+    color: $light_c;
     width: 80%;
     max-width: 500px;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      font-weight: bold;
+      font-family: $font_script;
+      font-size: 2rem;
+      text-align: center;
+      color: $accent_c;
+      padding-bottom: 20px;
+      text-shadow: 1px 1px 2px black;
     }
 
     input {
@@ -41,10 +40,11 @@
       margin-bottom: 15px;
       border: none;
       border-radius: 5px;
-      font-size: 16px;
+      font-size: 14px;
       box-sizing: border-box;
-      background-color: #fff;
+      background-color: $light_c;
       color: #333;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
       &::placeholder {
         color: #888;
@@ -56,27 +56,29 @@
     }
 
     button {
-      width: 100%;
-      padding: 15px;
+      // width: 90%;
+      padding: 0.5rem 3rem;
       border: none;
-      background-color: #0779ce;
-      color: white;
-      font-size: 16px;
+      background-color: $accent_c;
+      color: $light_c;
+      font-size: 14px;
       border-radius: 5px;
       cursor: pointer;
       box-sizing: border-box;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #055c8b; // Couleur bleue pour le bouton
+        background-color: rgba($accent_c, 0.8); // Couleur bleue pour le bouton
       }
 
       &:disabled {
-        background-color: #aaa;
+        background-color: $medium_light_c;
         cursor: default;
       }
       svg {
         margin-right: 15px;
+        height: 15px;
+        width: 15px;
       }
       .loader {
         display: flex;
@@ -88,7 +90,7 @@
           display: inline-block;
           width: 1rem;
           height: 1rem;
-          border: 2px solid white;
+          border: 2px solid $light_c;
           border-top: 2px solid transparent;
           border-radius: 50%;
           animation: spin 1s linear infinite;

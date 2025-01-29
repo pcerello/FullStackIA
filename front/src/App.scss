@@ -1,8 +1,23 @@
+@import './vars';
+#root{
+  background: 
+  linear-gradient(to bottom, rgba(0, 0, 0, 0.95), transparent, transparent, rgba(0, 0, 0, 0.95)), 
+  url("./assets/enquete.png") center center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: $font_lato, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: $light_c;
+}
+
+h1, h2, h3, h4{
+  font-family: $font_script, Georgia, 'Times New Roman', Times, serif;
+}
+
 .App {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   display: flex ;
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .App-logo {

@@ -1,341 +1,154 @@
-.Body-game {
-  flex-direction: column;
-  color: white;
-  align-items: flex-start;
-  height: calc(100vh - 88px - 64px);
+@import '../../vars';
+
+$primary-color: $hard_dark_c;
+$secondary-color: rgba($hard_dark_c, 0.75);
+$accent-color: rgba($hard_dark_c, 0.75);
+$font-family: 'Arial', sans-serif;
+
+.Game {
   display: flex;
-  background-color: #161616;
-  position: relative;
-  width: 100%;
-  text-align: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.Body-game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+
+  button {
+    background-color: $accent_c ;
+    color: $light_c;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+
+    &:hover {
+      background-color: rgba($accent_c, 0.8);
+    }
+
+    &:disabled {
+      background-color: $medium_light_c;
+      cursor: default;
+    }
+
+    svg {
+      margin-right: 15px;
+      height: 15px;
+      width: 15px;
+    }
+
+    .loader {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid $light_c;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+.Top,
+.Bottom {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+  padding: 20px;
 
-  .Top,
-  .Bottom {
-    width: 100%;
+  input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid $primary-color;
+  }
+}
+
+.Description {
+  background-color: $secondary-color;
+  padding: 20px;
+  border-radius: 8px;
+
+  h1 {
+    font-family: $font_script;
+    font-size: 2rem;
+    text-align: center;
+    color: $accent_c;
+    padding-bottom: -20px;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  .bloc_scenario {
+    border-radius: 6px;
+    font-size: 1em;
+    text-align: justify;
+    color: $light_c;
+
+    .texte {
+      margin: 0;
+      white-space: pre-line;
+      text-align: justify;
+    }
+  }
+}
+
+.temoignage {
+  background-color: $secondary-color;
+  padding: 20px;
+  border-radius: 8px;
+
+  h2 {
+    font-size: 1.5rem;
+    color: $light_c;
+  }
+
+  form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 10px;
+  }
+}
 
-    .Description {
-      height: 100%;
-      overflow: hidden;
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+.accusation {
+  background-color: $secondary-color;
+  padding: 20px;
+  border-radius: 8px;
 
-      h1 {
-        height: 15%;
-        display: flex;
-        align-items: center;
-      }
-
-      .ombrage {
-        height: 85%;
-        position: relative;
-        margin: 20px;
-
-        color: white;
-        overflow: hidden;
-
-        .texte {
-          overflow-y: scroll;
-          white-space: pre-wrap;
-          text-align: justify;
-          height: 100%;
-          margin: 0;
-          padding: 10px;
-          line-height: 1.5;
-
-          p {
-            margin: 0;
-            padding: 0;
-          }
-
-          &::-webkit-scrollbar {
-            width: 10px;
-          }
-
-          &::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 5px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: #7b746b;
-            border-radius: 5px;
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background: #56413a;
-          }
-        }
-
-        &:before,
-        &:after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          height: 30px; // ajuster la hauteur du fondu
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        &:before {
-          top: 0;
-          background: linear-gradient(to bottom, #161616, transparent);
-        }
-
-        &:after {
-          bottom: 0;
-          background: linear-gradient(to top, #161616, transparent);
-        }
-      }
-    }
-
-    .Testimonials {
-      height: 100%;
-      width: 50%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-direction: column;
-
-      .examination {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        width: 75%;
-
-        input {
-          width: 100%;
-          height: 50px;
-          margin: 10px;
-          padding: 10px;
-          border-radius: 5px;
-          background-color: #2d2d2d;
-          color: white;
-          font-size: 1.2em;
-          border: none;
-          transition: box-shadow 0.3s ease, transform 0.3s ease;
-          /* Ajout de la transition */
-
-          &::placeholder {
-            color: #94a3b8;
-          }
-
-          &:hover {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            /* Ombre légère */
-            transform: scale(1.02);
-            /* Légère augmentation de taille */
-          }
-
-          &:focus {
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
-            /* Ombre bleu clair */
-            outline: none;
-            /* Retire la bordure par défaut */
-            transform: scale(1.03);
-            /* Augmentation de taille légèrement plus importante */
-          }
-        }
-
-        button {
-          padding: 15px;
-          border: none;
-          background-color: #0779ce;
-          color: white;
-          font-size: 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          box-sizing: border-box;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: #055c8b; // Couleur bleue pour le bouton
-          }
-        }
-      }
-
-      .TestimonialsList {
-        button {
-          position: relative;
-          background-color: white;
-          color: black;
-          border: none;
-          border-radius: 5px;
-          padding: 10px 20px;
-          cursor: pointer;
-          overflow: hidden;
-          font-size: 16px;
-          z-index: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-
-          &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            /* La barre commence vide */
-            height: 100%;
-            background-color: #0779ce;
-            /* Couleur de la barre */
-            z-index: -1;
-            /* Place l'effet derrière le contenu du bouton */
-            transition: width 0.4s ease;
-            /* Animation fluide */
-          }
-
-
-          &:hover::before {
-            width: 100%;
-            /* La barre se remplit entièrement */
-          }
-
-          & span {
-            position: relative;
-            z-index: 1;
-            /* Assure que le texte reste visible */
-          }
-        }
-
-      }
-    }
-
-    .Accusation {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
-
-      img {
-        width: 10%;
-        height: 10%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-      }
-
-      h2 {
-        z-index: 1;
-      }
-
-      .accusationForm {
-        z-index: 1;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        width: 50%;
-
-        input {
-          width: 100%;
-          height: 50px;
-          margin: 10px;
-          padding: 10px;
-          border-radius: 5px;
-          background-color: #2d2d2d;
-          color: white;
-          font-size: 1.2em;
-          border: none;
-          transition: box-shadow 0.3s ease, transform 0.3s ease;
-          /* Ajout de la transition */
-
-          &::placeholder {
-            color: #94a3b8;
-          }
-
-          &:hover {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            /* Ombre légère */
-            transform: scale(1.02);
-            /* Légère augmentation de taille */
-          }
-
-          &:focus {
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
-            /* Ombre bleu clair */
-            outline: none;
-            /* Retire la bordure par défaut */
-            transform: scale(1.03);
-            /* Augmentation de taille légèrement plus importante */
-          }
-        }
-
-        button {
-          padding: 15px;
-          border: none;
-          background-color: #0779ce;
-          color: white;
-          font-size: 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          box-sizing: border-box;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: #055c8b; // Couleur bleue pour le bouton
-          }
-
-          &:disabled {
-            background-color: #aaa;
-            cursor: default;
-          }
-
-          .loader {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            &::before {
-              content: "";
-              display: inline-block;
-              width: 1rem;
-              height: 1rem;
-              border: 2px solid white;
-              border-top: 2px solid transparent;
-              border-radius: 50%;
-              animation: spin 1s linear infinite;
-            }
-
-            @keyframes spin {
-              from {
-                transform: rotate(0deg);
-              }
-
-              to {
-                transform: rotate(360deg);
-              }
-            }
-          }
-        }
-      }
-    }
+  h2 {
+    font-size: 1.5rem;
+    color: $light_c;
   }
 
-  .Top {
-    height: 70%;
+  .accusation-image {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    margin-bottom: 20px;
   }
 
-  .Bottom {
-    height: 30%;
+  .accusationForm {
+    display: flex;
+    gap: 10px;
+
   }
 }

@@ -1,3 +1,5 @@
+@import '../../vars';
+
 .overlay {
     position: fixed;
     top: 0;
@@ -12,7 +14,7 @@
   }
   
   .modal {
-    background-color: rgba(37, 37, 37, 0.9);;
+    background-color: rgba(37, 37, 37, 0.9);
     width: 90%;
     max-width: 600px;
     height: 50%;
@@ -21,7 +23,14 @@
     padding: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-    color: #fff;
+    color: $medium_light_c;
+
+    h2{
+      font-family: $font_script;
+      font-size: 2rem;
+      text-align: center;
+      color: $accent_c;
+    }
   }
   
   .close-button {
@@ -31,7 +40,7 @@
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: #fff;
+    color: $light_c;
     cursor: pointer;
   }
   
@@ -42,10 +51,22 @@
   }
   
   .modal-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    // border-bottom: 1px solid $light_c;
   }
   .clickable-item {
     cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+
+    &:hover {
+      cursor: pointer;
+      color: $light_c;
+      transform: scale(1.05);
+      transition: transform 0.5s ease;
+      transition: color 0.3s ease;
+      text-shadow: 1px 1px 6px black;
+
+  }
   }
   

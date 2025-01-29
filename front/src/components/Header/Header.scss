@@ -1,13 +1,16 @@
+@import '../../vars';
+
 .Header {
-    background-color: #2D2D2D;
-    color: white;
+    background-color: $hard_dark_c;
+    color: $light_c;
     height: 64px;
     font-size: 24px;
+    font-family: $font_script;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-around;
     padding: 0px 32px;
-
+    text-shadow: 1px 1px 2px black;
 
     .Logo {
         display: flex;
@@ -16,9 +19,9 @@
 
         &:hover {
             cursor: pointer;
-            color: #0779CE;
-            transform: scale(1.1);
-            transition: transform 0.3s ease;
+            color: $accent_c;
+            transform: scale(1.05);
+            transition: transform 0.5s ease;
             transition: color 0.3s ease;
 
         }
@@ -28,18 +31,18 @@
 
         button {
             // rouge
-            background-color: #D32F2F;
-            color: white;
+            background-color: rgba(indianred, 0.85);
+            color: $light_c;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 14px;
+            // font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: #FF5252;
+                background-color:  rgba(indianred, 0.65);
             }
         }
 
