@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import ApiService from "../../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faClockRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import ModalHome from "../../components/ModalHome/ModalHome";
 
 const Home: React.FC = () => {
@@ -74,7 +74,9 @@ const Home: React.FC = () => {
               {isLoading ? (
                 <span className="loader">Attendez... longtemps... très longtemps...</span>
               ) : (
-                "Lancer la partie"
+                <>
+                <FontAwesomeIcon icon={faPlay} /> Lancer la partie
+                </>
               )}
             </button>
           </form>
