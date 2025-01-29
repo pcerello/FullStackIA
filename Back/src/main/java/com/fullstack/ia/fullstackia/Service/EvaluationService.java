@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,20 +26,25 @@ public class EvaluationService {
     private final ScenarioPriveService scenarioPriveService;
     private final ScenarioRepository scenarioRepository;
 
-    public ResponseEntity<EvaluationDTO> evaluerReponse(String userResponse) {
+    public ResponseEntity<EvaluationDTO> evaluerReponse(String userResponse, Long scenarioId) {
 
-        // récupérer le dernier scénario publique en base
-        ScenarioEntity lastScenario = scenarioService.getLastInsertedScenario();
+        Optional<ScenarioEntity> optionalScenario = scenarioRepository.findById(scenarioId);
+
+        if (optionalScenario.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ScenarioEntity scenario = optionalScenario.get();
 
 
         // récupèrer le scenario privé lié au scénario publique
-        ScenarioPriveEntity scenarioPrive = scenarioPriveService.getScenarioPriveByScenarioId(lastScenario.getId());
+        ScenarioPriveEntity scenarioPrive = scenarioPriveService.getScenarioPriveByScenarioId(scenario.getId());
 
         // récupérer les témoignages liés au dernier scénario
-        List<TemoignageEntity> temoignages = temoignageService.getTemoignagesByScenarioId(lastScenario.getId());
+        List<TemoignageEntity> temoignages = temoignageService.getTemoignagesByScenarioId(scenario.getId());
 
         String prompt = "Voici le contexte de l'enquête :\n" +
-                "Scénario publique dévoilé à l'utilisateur : " + lastScenario.getDescription() + "\n" +
+                "Scénario publique dévoilé à l'utilisateur : " + scenario.getDescription() + "\n" +
                 "Témoignages :\n";
 
         for (TemoignageEntity temoignage : temoignages) {
@@ -52,11 +59,12 @@ public class EvaluationService {
 
         String evaluation = aIService.appelOllama(userResponse, prompt);
 
-        return saveGeneratedEvaluation(evaluation);
+        return saveGeneratedEvaluation(evaluation,scenarioId);
     }
-    public ResponseEntity<EvaluationDTO> saveGeneratedEvaluation(String description){
+    public ResponseEntity<EvaluationDTO> saveGeneratedEvaluation(String description, Long scenarioId){
         EvaluationEntity evaluationEntity =  EvaluationEntity.builder()
                 .description(description)
+                .scenario(scenarioRepository.findById(scenarioId).orElseThrow(() -> new IllegalArgumentException("Scenario non trouvé pour l'ID : " + scenarioId)))
                 .build();
         EvaluationEntity savedEvaluation = evaluationRepository.save(evaluationEntity);
 
@@ -68,27 +76,28 @@ public class EvaluationService {
         return ResponseEntity.ok(evaluationDTO);
     }
 
-    public ResponseEntity<EvaluationDTO> getEvaluationByIdScenario(Long scenarioId) {
+    public ResponseEntity<List<EvaluationDTO>> getEvaluationByIdScenario(Long scenarioId) {
         // on vérifie si le scenario existe en base de donnée
         if (!scenarioRepository.existsById(scenarioId)) {
             // on retourne un code 404 si le scénario n'existe pas
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        EvaluationEntity evaluationEntity = evaluationRepository.findByScenarioId(scenarioId);
+        List<EvaluationEntity> evaluationEntities = evaluationRepository.findByScenarioId(scenarioId);
 
         //on vérifie si on a recup l'evaluation
-        if (evaluationEntity == null) {
+        if (evaluationEntities.isEmpty()) {
             // on retourner un code 204 No Content s'il y est pas
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        EvaluationDTO evaluationDTO = new EvaluationDTO(
-                evaluationEntity.getId(),
-                evaluationEntity.getDescription()
-        );
+        List<EvaluationDTO> evaluationDTOS =  evaluationEntities.stream()
+                .map(evaluation -> new EvaluationDTO(
+                    evaluation.getId(),
+                    evaluation.getDescription()
+                ))
+                .collect(Collectors.toList());
 
-        return ResponseEntity.ok(evaluationDTO);
-
+        return ResponseEntity.ok(evaluationDTOS);
     }
 }

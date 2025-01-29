@@ -24,14 +24,14 @@ public class AIController {
         return scenarioPublique;
     }
 
-    @PostMapping(path = "/genererTemoignages")
-    public ResponseEntity<TemoignageDTO> genererTemoignagesPourScenario(@RequestBody QuestionDTO questionDTO) {
-        return temoignageService.genererTemoignages(questionDTO.question());
+    @PostMapping(path = "/genererTemoignages/{scenarioId}")
+    public ResponseEntity<TemoignageDTO> genererTemoignagesPourScenario(@RequestBody QuestionDTO questionDTO,@PathVariable Long scenarioId) {
+        return temoignageService.genererTemoignages(questionDTO.question(),scenarioId);
     }
 
-    @PostMapping(path = "/evaluationReponseUtilisateur")
-    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse) {
-        return evaluationService.evaluerReponse(userResponse.question());
+    @PostMapping(path = "/evaluationReponseUtilisateur/{scenarioId}")
+    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse, @PathVariable Long scenarioId) {
+        return evaluationService.evaluerReponse(userResponse.question(),scenarioId);
     }
 
     // récupèrer tous les témoignages liés à un scenario
@@ -54,7 +54,7 @@ public class AIController {
 
     // récupérer l'evaluation liée à un scenario
     @GetMapping("/scenario/{scenarioId}/evaluation")
-    public ResponseEntity<EvaluationDTO> getEvaluationByScenario(@PathVariable Long scenarioId) {
+    public ResponseEntity<List<EvaluationDTO>> getEvaluationByScenario(@PathVariable Long scenarioId) {
         return evaluationService.getEvaluationByIdScenario(scenarioId);
     }
 
