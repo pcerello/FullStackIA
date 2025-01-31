@@ -19,6 +19,9 @@ public class EvaluationEntity {
     @Lob
     private String description;
 
+    @Lob
+    private Long timer;
+
     @ManyToOne
     @JoinColumn(name = "scenario_id")
     private ScenarioEntity scenario;

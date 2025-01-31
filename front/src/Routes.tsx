@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home'; // Import de la page Home
 import Game from './pages/Game/Game'; // Import de la page Game
 import Endgame from './pages/Endgame/Endgame'; // Import de la page Endgame
-import TestJson from './pages/TestJson/TestJson'; // Import de la page TestJson
+import History from './pages/History/History'; // Import de la page History
 
 const AppRoutes = () => {
   return (
@@ -12,7 +12,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/game/:id" element={<Game />} />
         <Route path="/endgame" element={<Endgame />} />
-        <Route path="/testJson" element={<TestJson />} />
+        <Route path="/history/:id" element={<History />} />
       </Routes>
     </Router>
   );

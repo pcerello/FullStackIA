@@ -10,25 +10,39 @@
 
 Pré-requis :
 
-- Avoir installé MySql 8.0
-- Avoir installé NodeJs
+- Avoir installé MySql 8.0 et s'assurer que le service mysql80 tourne
+- Avoir installé Node.js
 - Avoir installé JDK version 17 minimum
 - Avoir Ollama d'installé : https://ollama.com/download/OllamaSetup.exe
 
 
 Installation du jeu :
 
-- Créer une base de données MySql avec un schéma appelé "pistes_mortelles" 
-
-- Changer le mot de passe de la base de données:
-    Dans la configuration du runner Java spécifier:
-    Environement variables : password=mot_de_passe_de_votre_DB
 
 - Lancer dans une console : <ollama run llama3.2>
 
-- Lancer le projet Java sur le dossier "Back"
+Sur IntelliJ :
 
-- Lancer le serveur npm sur le dossier "Front"
+- Ouvrir le dossier "Back" du projet
+
+- Editer une configuration de Runner :
+    Edit Configurations -> Add New Configuration -> Spring Boot 
+
+- Changer le mot de passe de la base de données:
+    Dans la configuration du runner Java spécifier:
+    Environement variables : password=mot_de_passe_de_votre_DB;user=nom_utilisateur_de_votre_DB
+
+- Via l'interface Database de IntelliJ :
+    New -> Data Source -> MySQL -> Saisir le nom d'utilisateur et le mot de passe de votre DB et tester la connexion
+    Cliquer droit sur la connexion créée -> New -> Schema -> le nommer : "pistes_mortelles" 
+
+- Lancer le projet Java sur le dossier "Back" en faisant un Run
+
+Sur VSCode :
+
+- Ouvrir le dossier "front"
+
+- Lancer le client :
         - Commande <npm i>
         - Puis commande <npm run start>
 
@@ -51,4 +65,4 @@ Le jeu :
     - Possibilité d'abandonner la partie
 
 - Quand vous aurez porté une accusation, vous serez redirigé sur la page "Résultat"
-    - Sur laquelle vous aurez le vérdict
+    - Sur laquelle vous aurez le verdict

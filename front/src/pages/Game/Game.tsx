@@ -1,5 +1,5 @@
 import './Game.scss';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +21,21 @@ function Game() {
   const [isLoadingTemoin, setIsLoadingTemoin] = useState(false);
   const [scenario, setScenario] = useState("");
 
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+
+  useEffect(() => {
+    if (isGameOver) return; // Empêche le démarrage du timer si le jeu est terminé
+
+    const timer = setInterval(() => {
+      setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+    }, 1000);
+
+    console.log("Timer démarré", elapsedTime);
+
+    return () => clearInterval(timer);
+  }, [elapsedTime]); // Dépend de isGameOver
+
   // RECUPERATION DONNEE HISTOIRE
   async function fetchInfoScenario() {
     try {
@@ -35,7 +50,14 @@ function Game() {
   // RECUPERATION ID HISTOIRE
   useEffect(() => {
     fetchInfoScenario();
+    console.log("ID mis à jour :", id);
+
   }, [id]);
+
+  useEffect(() => {
+    console.log("Témoignages mis à jour :", temoignage);
+  }, [temoignage]);
+
 
   // ACTION TEMOIN
   const handleTemoinSubmit = (event: React.FormEvent) => {
@@ -46,8 +68,10 @@ function Game() {
   // DATA TEMOIN
   async function fetchDataTemoin(request: string) {
     try {
+
+      console.log("Fetching Temoignage...", request);
       setIsLoadingTemoin(true);
-      const unTemoignage = await ApiService.post(`genererTemoignages`, request); // Id ajouté : `genererTemoignages/${id}`
+      const unTemoignage = await ApiService.post(`genererTemoignages/` + id, request); // Id ajouté : `genererTemoignages/${id}`
       setIsModalTemoignage(true);
       setTemoignage(unTemoignage);
     } catch (error) {
@@ -67,7 +91,9 @@ function Game() {
   async function fetchDataCoupable(request: string) {
     try {
       setIsLoadingGuilty(true);
-      const data = await ApiService.post(`evaluationReponseUtilisateur`, request); // Id ajouté : `evaluationReponseUtilisateur/${id}`
+      const data = await ApiService.post(`evaluationReponseUtilisateur/` + id + `?timer=${elapsedTime}`, request); // Id ajouté : `evaluationReponseUtilisateur/${id}`
+      setIsGameOver(true);
+      console.log("time", elapsedTime);
       navigate("/endgame", { state: data });
     } catch (error) {
       console.error("Erreur lors de l'appel API :", error);
@@ -76,7 +102,7 @@ function Game() {
     }
   }
 
-    // DATA HISTORIQUE TEMOINS
+  // DATA HISTORIQUE TEMOINS
   async function fetchTemoignages() {
     try {
       console.log("Fetching Temoignages...");
@@ -130,10 +156,16 @@ function Game() {
                   )}
                 </button>
               </form>
-              <button onClick={handleListTemoignages} className="histoTemoin">
-                <FontAwesomeIcon icon={faClockRotateLeft} />
-                <span>Témoignages</span>
-              </button>
+
+              {
+                // Si on a des témoignages, on affiche le bouton pour les voir
+                temoignage.id != 0 && (
+                  <button onClick={handleListTemoignages} className="histoTemoin">
+                    <FontAwesomeIcon icon={faClockRotateLeft} />
+                    <span>Témoignages</span>
+                  </button>
+                )
+              }
             </div>
             <div className="accusation">
               <h2>Section accusation</h2>

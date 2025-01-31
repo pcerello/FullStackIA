@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import ModalHome from "../../components/ModalHome/ModalHome";
+import { useEffect } from "react";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -32,6 +33,12 @@ const Home: React.FC = () => {
     }
   };
 
+  // RECUPERATION ID HISTOIRE
+  useEffect(() => {
+    fetchHistorique();
+    console.log("Historique mis à jour :", historiques);
+  }, []);
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     fetchData(theme);
@@ -49,7 +56,7 @@ const Home: React.FC = () => {
 
   const handleListHistoriques = () => {
     setIsModalHistorique(true);
-    fetchHistorique();
+    // fetchHistorique();
   };
 
   const closeModal = () => {
@@ -75,14 +82,20 @@ const Home: React.FC = () => {
                 <span className="loader">Attendez... longtemps... très longtemps...</span>
               ) : (
                 <>
-                <FontAwesomeIcon icon={faPlay} /> Lancer la partie
+                  <FontAwesomeIcon icon={faPlay} /> Lancer la partie
                 </>
               )}
             </button>
-            <Link to="/" onClick={handleListHistoriques}>
-                    <FontAwesomeIcon icon={faClockRotateLeft} />
-                    <span>Historique</span>
-            </Link>
+
+            {
+              // Si on a des témoignages, on affiche le bouton pour les voir
+              historiques.length > 0 && (
+                <Link to="/" onClick={handleListHistoriques}>
+                  <FontAwesomeIcon icon={faClockRotateLeft} />
+                  <span>Historique</span>
+                </Link>
+              )
+            }
           </form>
         </div>
       </div>

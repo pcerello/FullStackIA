@@ -26,7 +26,7 @@ public class EvaluationService {
     private final ScenarioPriveService scenarioPriveService;
     private final ScenarioRepository scenarioRepository;
 
-    public ResponseEntity<EvaluationDTO> evaluerReponse(String userResponse, Long scenarioId) {
+    public ResponseEntity<EvaluationDTO> evaluerReponse(String userResponse, Long scenarioId, Long timer) {
 
         Optional<ScenarioEntity> optionalScenario = scenarioRepository.findById(scenarioId);
 
@@ -59,18 +59,20 @@ public class EvaluationService {
 
         String evaluation = aIService.appelOllama(userResponse, prompt);
 
-        return saveGeneratedEvaluation(evaluation,scenarioId);
+        return saveGeneratedEvaluation(evaluation,scenarioId, timer);
     }
-    public ResponseEntity<EvaluationDTO> saveGeneratedEvaluation(String description, Long scenarioId){
+    public ResponseEntity<EvaluationDTO> saveGeneratedEvaluation(String description, Long scenarioId, Long timer) {
         EvaluationEntity evaluationEntity =  EvaluationEntity.builder()
                 .description(description)
+                .timer(timer)
                 .scenario(scenarioRepository.findById(scenarioId).orElseThrow(() -> new IllegalArgumentException("Scenario non trouvé pour l'ID : " + scenarioId)))
                 .build();
         EvaluationEntity savedEvaluation = evaluationRepository.save(evaluationEntity);
 
         EvaluationDTO evaluationDTO = new EvaluationDTO(
                 savedEvaluation.getId(),
-                savedEvaluation.getDescription()
+                savedEvaluation.getDescription(),
+                savedEvaluation.getTimer()
         );
 
         return ResponseEntity.ok(evaluationDTO);
@@ -94,7 +96,8 @@ public class EvaluationService {
         List<EvaluationDTO> evaluationDTOS =  evaluationEntities.stream()
                 .map(evaluation -> new EvaluationDTO(
                     evaluation.getId(),
-                    evaluation.getDescription()
+                    evaluation.getDescription(),
+                        evaluation.getTimer()
                 ))
                 .collect(Collectors.toList());
 

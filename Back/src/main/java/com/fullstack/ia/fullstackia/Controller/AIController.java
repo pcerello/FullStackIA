@@ -30,8 +30,8 @@ public class AIController {
     }
 
     @PostMapping(path = "/evaluationReponseUtilisateur/{scenarioId}")
-    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse, @PathVariable Long scenarioId) {
-        return evaluationService.evaluerReponse(userResponse.question(),scenarioId);
+    public ResponseEntity<EvaluationDTO> evaluationReponseUtilisateur(@RequestBody QuestionDTO userResponse, @PathVariable Long scenarioId, @RequestParam Long timer) {
+        return evaluationService.evaluerReponse(userResponse.question(),scenarioId, timer);
     }
 
     // récupèrer tous les témoignages liés à un scenario
