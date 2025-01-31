@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.Collections;
 
@@ -24,19 +25,25 @@ public class TemoignageService {
     private final AIService aiService;
     private final ScenarioService scenarioService;
 
-    public ResponseEntity<TemoignageDTO> genererTemoignages(String question) {
+    public ResponseEntity<TemoignageDTO> genererTemoignages(String question, Long scenarioId) {
 
         // récupérer le dernier scénario en base
-        ScenarioEntity lastScenario = scenarioService.getLastInsertedScenario();
+        Optional<ScenarioEntity> optionalScenario = scenarioRepository.findById(scenarioId);
+
+        if (optionalScenario.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ScenarioEntity scenario = optionalScenario.get();
 
         // génèrer le prompt en se basant sur le dernier scnario inséré en bdd
-        String prompt = "Voici le scénario : \n" + lastScenario.getDescription() + "\n" +
+        String prompt = "Voici le scénario : \n" + scenario.getDescription() + "\n" +
                 "Générez un témoignage pour chaque suspect, chaque témoignage incluant une preuve associée." +
                 "Tu ne dois pas dépasser les 200 caractères";
 
         String response =aiService.appelOllama(question,prompt);
 
-        return saveGeneratedTemoignages(response, lastScenario.getId());
+        return saveGeneratedTemoignages(response,scenarioId);
     }
 
     public ResponseEntity<TemoignageDTO> saveGeneratedTemoignages(String description, Long scenarioId){

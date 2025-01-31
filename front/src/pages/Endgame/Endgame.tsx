@@ -43,7 +43,7 @@ function Endgame() {
               { data.description }
             </p>
           </div>
-          <button className="end-game__button"  onClick={() => handleRetour()}>Retour</button>
+          <button className="end-game__button"  onClick={() => handleRetour()}>Accueil</button>
         </div>
       </div>
       <Footer />
