@@ -1,5 +1,8 @@
+@import '../../vars';
+
 .Footer {
-    background-color: #2D2D2D;
+    background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent, transparent, rgba(0, 0, 0, 0.15)), $medium_dark_c;
     color: white;
     font-size: 12px;
     display: flex;
@@ -7,6 +10,7 @@
     align-items: center;
     gap: 2rem;
     margin-top: 45px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     p {
         text-align: center;

@@ -14,7 +14,7 @@ $font-family: 'Arial', sans-serif;
 .Body-game {
   flex: 1;
 
-  .Top{
+  .Top {
     display: flex;
     flex-wrap: wrap;
     max-width: 1000px;
@@ -35,6 +35,7 @@ $font-family: 'Arial', sans-serif;
     &:hover {
       background-color: rgba($accent_c, 0.5);
     }
+
     transition: background-color 0.2s ease-in-out;
 
     &:disabled {
@@ -80,6 +81,7 @@ $font-family: 'Arial', sans-serif;
     background-color: $secondary-color;
     padding: 20px;
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 
     h1 {
       font-family: $font_script;
@@ -104,28 +106,30 @@ $font-family: 'Arial', sans-serif;
     }
   }
 
-  .userDecision{
+  .userDecision {
     background-color: $secondary-color;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 
-    .temoignage, .accusation {
+    .temoignage,
+    .accusation {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
       padding: 20px;
-      
+
       form {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
 
-        input{
+        input {
           width: 270px;
           padding: 10px;
           font-size: 1rem;
@@ -133,24 +137,29 @@ $font-family: 'Arial', sans-serif;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
         }
-        button{
+
+        button {
           width: 250px;
         }
-        a{
-          span{
+
+        a {
+          span {
             margin-left: 15px;
           }
-          &:hover{
+
+          &:hover {
             color: rgba($light_c, 0.5);
           }
+
           transition: color 0.2s ease-in-out;
         }
       }
 
-      .histoTemoin{
+      .histoTemoin {
         background-color: rgba($light_c, 0.0);
         font-weight: bold;
-        &:hover{
+
+        &:hover {
           color: rgba($light_c, 0.5);
         }
       }
@@ -162,8 +171,8 @@ $font-family: 'Arial', sans-serif;
         text-align: center;
       }
     }
-    
-    .accusation {  
+
+    .accusation {
       .accusation-image {
         width: 100%;
         height: auto;
@@ -172,10 +181,12 @@ $font-family: 'Arial', sans-serif;
     }
   }
 }
+
 @media screen and (min-width: 1000px) {
-  .userDecision{
+  .userDecision {
     gap: 20px;
   }
+
   .Description {
     max-width: 50%;
   }

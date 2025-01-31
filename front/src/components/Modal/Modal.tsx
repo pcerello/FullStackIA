@@ -38,7 +38,7 @@ function Modal(props: { open: boolean; content: {id: number, description: String
 
               : // sinon, on affiche juste  
               // texte
-              <p>props.content.description</p>
+              <p>{ props.content.description }</p>
           }
         </div>
       </div>

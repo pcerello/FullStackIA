@@ -1,7 +1,8 @@
 @import '../../vars';
 
 .Header {
-    background-color: $hard_dark_c;
+    background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent, transparent, rgba(0, 0, 0, 0.15)), $medium_dark_c;
     color: $light_c;
     height: 64px;
     font-size: 24px;
@@ -11,6 +12,7 @@
     justify-content: space-around;
     padding: 0px 32px;
     text-shadow: 1px 1px 2px black;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     .Logo {
         display: flex;
