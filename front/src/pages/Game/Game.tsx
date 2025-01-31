@@ -1,8 +1,8 @@
 import './Game.scss';
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClockRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ApiService from "../../services/ApiService";
@@ -47,7 +47,7 @@ function Game() {
   async function fetchDataTemoin(request: string) {
     try {
       setIsLoadingTemoin(true);
-      const unTemoignage = await ApiService.post(`genererTemoignages/${id}`, request); // Id ajouté
+      const unTemoignage = await ApiService.post(`genererTemoignages`, request); // Id ajouté : `genererTemoignages/${id}`
       setIsModalTemoignage(true);
       setTemoignage(unTemoignage);
     } catch (error) {
@@ -67,7 +67,7 @@ function Game() {
   async function fetchDataCoupable(request: string) {
     try {
       setIsLoadingGuilty(true);
-      const data = await ApiService.post(`evaluationReponseUtilisateur/${id}`, request); // Id ajouté
+      const data = await ApiService.post(`evaluationReponseUtilisateur`, request); // Id ajouté : `evaluationReponseUtilisateur/${id}`
       navigate("/endgame", { state: data });
     } catch (error) {
       console.error("Erreur lors de l'appel API :", error);
@@ -85,7 +85,13 @@ function Game() {
   // DATA HISTORIQUE TEMOINS
   async function fetchTemoignages() {
     try {
-      const temoignages = await ApiService.get(`scenario/${id}/ListeTemoignages`);
+      const response = await ApiService.get(`scenario/${id}/ListeTemoignages`);
+    
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP : ${response.status}`);
+      }
+  
+      const temoignages = await response.json(); // Vérifie le contenu JSON
       setTemoignages(temoignages);
     } catch (error) {
       console.error("Erreur lors de l'appel API :", error);
@@ -102,20 +108,20 @@ function Game() {
           <div className="Description">
             <h1>Scénario du jeu</h1>
             <div className="bloc_scenario">
-              <p className="texte">
+              <div className="texte">
                 <p>&nbsp;</p>
                 {scenario || "Chargement du scénario..."}
                 <p>&nbsp;</p>
-              </p>
+              </div>
             </div>
           </div>
-          <div className="bottom">
+          <div className="userDecision">
             <div className="temoignage">
               <h2>Section interrogatoire</h2>
               <form onSubmit={handleTemoinSubmit}>
                 <input
                   type="text"
-                  placeholder="Qui voulez-vous interroger ?"
+                  placeholder="Qui interroger ?"
                   value={temoin}
                   onChange={(e) => setTemoin(e.target.value)} />
                 <button type="submit" disabled={isLoadingTemoin}>
@@ -125,11 +131,11 @@ function Game() {
                     "Interroger"
                   )}
                 </button>
+                <Link to="/" onClick={handleListTemoignages}>
+                  <FontAwesomeIcon icon={faClockRotateLeft} />
+                  <span>Témoignages</span>
+                </Link>
               </form>
-              <button onClick={handleListTemoignages}>
-                <FontAwesomeIcon icon={faClockRotateLeft} />
-                 Témoignages
-              </button>
             </div>
             <div className="accusation">
               <h2>Section accusation</h2>

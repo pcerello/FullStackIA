@@ -3,7 +3,7 @@ import "./Home.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ApiService from "../../services/ApiService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import ModalHome from "../../components/ModalHome/ModalHome";
@@ -79,11 +79,11 @@ const Home: React.FC = () => {
                 </>
               )}
             </button>
+            <Link to="/" onClick={handleListHistoriques}>
+                    <FontAwesomeIcon icon={faClockRotateLeft} />
+                    <span>Historique</span>
+            </Link>
           </form>
-          <button onClick={handleListHistoriques}>
-            <FontAwesomeIcon icon={faClockRotateLeft} />
-            Historique
-          </button>
         </div>
       </div>
       <Footer />
