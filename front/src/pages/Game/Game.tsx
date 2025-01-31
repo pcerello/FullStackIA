@@ -76,27 +76,25 @@ function Game() {
     }
   }
 
-  // REVOIR LA LISTE DE TEMOIGNAGE
-  const handleListTemoignages = () => {
-    setIsModalListTemoignages(true);
-    fetchTemoignages();
-  };
-
-  // DATA HISTORIQUE TEMOINS
+    // DATA HISTORIQUE TEMOINS
   async function fetchTemoignages() {
     try {
-      const response = await ApiService.get(`scenario/${id}/ListeTemoignages`);
-    
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP : ${response.status}`);
-      }
-  
-      const temoignages = await response.json(); // Vérifie le contenu JSON
+      console.log("Fetching Temoignages...");
+      const temoignages = await ApiService.get(`scenario/${id}/ListeTemoignages`);
       setTemoignages(temoignages);
+      console.log(temoignages);
+
     } catch (error) {
       console.error("Erreur lors de l'appel API :", error);
     }
   }
+
+  // REVOIR LA LISTE DE TEMOIGNAGE
+  const handleListTemoignages = () => {
+    console.log("Liste des témoignages");
+    setIsModalListTemoignages(true);
+    fetchTemoignages();
+  };
 
   return (
     <div className="Game">
@@ -131,11 +129,11 @@ function Game() {
                     "Interroger"
                   )}
                 </button>
-                <Link to="/" onClick={handleListTemoignages}>
-                  <FontAwesomeIcon icon={faClockRotateLeft} />
-                  <span>Témoignages</span>
-                </Link>
               </form>
+              <button onClick={handleListTemoignages} className="histoTemoin">
+                <FontAwesomeIcon icon={faClockRotateLeft} />
+                <span>Témoignages</span>
+              </button>
             </div>
             <div className="accusation">
               <h2>Section accusation</h2>
