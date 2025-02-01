@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Endgame.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 function Endgame() {
   const navigate = useNavigate();

@@ -32,14 +32,12 @@
     .Button-end {
 
         button {
-            // rouge
             background-color: rgba(indianred, 0.85);
             color: $light_c;
             border: none;
             padding: 4px 8px;
             border-radius: 3px;
             font-size: 14px;
-            // font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
 

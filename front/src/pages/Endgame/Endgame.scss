@@ -77,7 +77,6 @@
         transform: rotateY(180deg);
       }
 
-      /* Barre de défilement personnalisée */
       &::-webkit-scrollbar {
         width: 8px;
       }
@@ -89,7 +88,6 @@
     }
 
     button {
-      // width: 90%;
       padding: 0.5rem 3rem;
       border: none;
       background-color: $accent_c;
@@ -102,7 +100,7 @@
       margin: 55px 0 35px 0;
 
       &:hover {
-        background-color: rgba($accent_c, 0.8); // Couleur bleue pour le bouton
+        background-color: rgba($accent_c, 0.8); 
       }
 
       &:disabled {

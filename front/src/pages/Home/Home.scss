@@ -73,7 +73,6 @@
       }
 
       button {
-        // width: 90%;
         padding: 0.5rem 3rem;
         border: none;
         background-color: $accent_c;
@@ -85,7 +84,7 @@
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: rgba($accent_c, 0.8); // Couleur bleue pour le bouton
+          background-color: rgba($accent_c, 0.8); 
         }
 
         &:disabled {

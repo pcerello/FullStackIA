@@ -24,10 +24,8 @@ const ModalHome: React.FC<ModalHomeProps> = ({ isOpen, onClose, data }) => {
   // DATA HISTORIQUE EVALUATIONS
   async function fetchTemoignages(item: { id: number; description: string }) {
     try {
-      console.log("Fetching Temoignages...", item.id);
       const mesEvaluations = await ApiService.get(`scenario/${item.id}/evaluations`);
       setEvaluations(await ApiService.get(`scenario/${item.id}/evaluations`));
-      console.log(mesEvaluations);
       navigate(`/history/${item.id}`, { state: { evaluations: mesEvaluations, description: item.description } })
 
     } catch (error) {
@@ -37,7 +35,6 @@ const ModalHome: React.FC<ModalHomeProps> = ({ isOpen, onClose, data }) => {
 
   // REVOIR LA LISTE DE TEMOIGNAGE
   const handleHistorySubmit = (item: { id: number; description: string }) => {
-    console.log("Liste des témoignages");
     fetchTemoignages(item);
   };
 

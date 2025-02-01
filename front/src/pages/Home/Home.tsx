@@ -24,7 +24,6 @@ const Home: React.FC = () => {
     try {
       setIsLoading(true);
       const data = await ApiService.post("genererScenario", question);
-      console.log(data);
       navigate("/game/" + data.id);
     } catch (error) {
       console.error("Erreur lors de l'appel API :", error);
@@ -36,7 +35,6 @@ const Home: React.FC = () => {
   // RECUPERATION ID HISTOIRE
   useEffect(() => {
     fetchHistorique();
-    console.log("Historique mis à jour :", historiques);
   }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -46,7 +44,6 @@ const Home: React.FC = () => {
 
   const fetchHistorique = async () => {
     try {
-      console.log("Fetching Historique...");
       const temoignages = await ApiService.get("historiqueScenarios");
       setHistoriques(temoignages);
     } catch (error) {
@@ -56,7 +53,6 @@ const Home: React.FC = () => {
 
   const handleListHistoriques = () => {
     setIsModalHistorique(true);
-    // fetchHistorique();
   };
 
   const closeModal = () => {
@@ -70,13 +66,7 @@ const Home: React.FC = () => {
         <div className="form-overlay">
           <h2>Saisissez le thème de votre enquête</h2>
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={theme}
-              onChange={handleThemeChange}
-              placeholder="Ex: Meurtre mystérieux"
-              disabled={isLoading}
-            />
+            <input type="text" value={theme} onChange={handleThemeChange} placeholder="Ex: Meurtre mystérieux" disabled={isLoading} />
             <button type="submit" disabled={isLoading}>
               {isLoading ? (
                 <span className="loader">Attendez... longtemps... très longtemps...</span>
@@ -87,15 +77,12 @@ const Home: React.FC = () => {
               )}
             </button>
 
-            {
-              // Si on a des témoignages, on affiche le bouton pour les voir
-              historiques.length > 0 && (
-                <Link to="/" onClick={handleListHistoriques}>
-                  <FontAwesomeIcon icon={faClockRotateLeft} />
-                  <span>Historique</span>
-                </Link>
-              )
-            }
+            {historiques.length > 0 && (
+              <Link to="/" onClick={handleListHistoriques}>
+                <FontAwesomeIcon icon={faClockRotateLeft} />
+                <span>Historique</span>
+              </Link>
+            )}
           </form>
         </div>
       </div>
