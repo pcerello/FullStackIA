@@ -1,6 +1,6 @@
 import "./Game.scss";
-import React, { useState, useEffect, use } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header/Header";
