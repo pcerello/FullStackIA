@@ -52,6 +52,8 @@ Sur VSCode :
 Le jeu :
 
 - Sur la page d'accueil, vous pouvez retrouver l'historique des 5 dernières enquètes enregsitrées (si il y en a)
+    - vous pouvez cliquer sur le bouton "Voir" d'une enquête pour voir les détails de celle-ci
+    - vous pouvez cliquer sur le bouton "Rejouer" pour rejouer une enquête
 
 - Ou lancer une nouvelle partie
     - Entrer un thème pour une nouvelle enquête
@@ -66,3 +68,4 @@ Le jeu :
 
 - Quand vous aurez porté une accusation, vous serez redirigé sur la page "Résultat"
     - Sur laquelle vous aurez le verdict
+    - La possibilité de retourner à l'accueil
